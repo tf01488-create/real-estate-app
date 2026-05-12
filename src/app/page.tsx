@@ -28,6 +28,7 @@ import {
 interface Inputs {
   propertyPrice: number;
   downPayment: number;
+  closingCostRate: number;
   loanRate: number;
   loanYears: number;
   monthlyRent: number;
@@ -121,6 +122,7 @@ function calcMonthlyPayment(principal: number, annualRate: number, years: number
 const DEFAULT_INPUTS: Inputs = {
   propertyPrice: 3000,
   downPayment: 600,
+  closingCostRate: 6,
   loanRate: 1.5,
   loanYears: 30,
   monthlyRent: 15,
@@ -159,9 +161,10 @@ export default function Home() {
   const results = useMemo(() => {
     const loanAmount = inputs.propertyPrice - inputs.downPayment;
     const monthlyPayment = calcMonthlyPayment(loanAmount, inputs.loanRate, inputs.loanYears);
+    const closingCosts = Math.round(inputs.propertyPrice * (inputs.closingCostRate / 100) * 10) / 10;
 
     let remainingLoan = loanAmount;
-    let cumulativeCashflow = -inputs.downPayment;
+    let cumulativeCashflow = -(inputs.downPayment + closingCosts);
     const data = [];
 
     for (let year = 1; year <= 35; year++) {
@@ -226,7 +229,7 @@ export default function Home() {
     const saleNetProceeds = inputs.salePrice - saleRow.remainingLoan;
     const saleTotalReturn = saleRow.cumulativeCashflow + saleNetProceeds;
 
-    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex, saleIdx, saleRow, saleNetProceeds, saleTotalReturn };
+    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex, saleIdx, saleRow, saleNetProceeds, saleTotalReturn, closingCosts };
   }, [inputs]);
 
   const summaryCards = [
@@ -325,6 +328,17 @@ export default function Home() {
                 unit="万円"
                 step={50}
                 presets={[0, 100, 300, 500, 1000]}
+              />
+              <InputField
+                label="購入時諸費用率"
+                description="仲介手数料・登記費用・ローン手数料などの合計（物件価格の5〜8%が目安）"
+                value={inputs.closingCostRate}
+                onChange={set("closingCostRate")}
+                onPresetClick={preset("closingCostRate")}
+                unit="%"
+                step={0.5}
+                max={15}
+                presets={[5, 6, 7, 8]}
               />
               <InputField
                 label="ローン金利"
@@ -455,11 +469,21 @@ export default function Home() {
 
           {/* Loan Info */}
           <div className="mt-3 bg-blue-900 border border-blue-700 rounded-xl p-4 text-sm">
-            <p className="font-semibold text-blue-100 mb-2">ローン概要</p>
+            <p className="font-semibold text-blue-100 mb-2">初期費用・ローン概要</p>
             <div className="space-y-1 text-blue-200 text-xs">
               <div className="flex justify-between">
-                <span>借入額</span>
-                <span className="font-medium">{formatManYen(results.loanAmount)}</span>
+                <span>購入時諸費用</span>
+                <span className="font-medium text-orange-300">{results.closingCosts.toFixed(0)}万円</span>
+              </div>
+              <div className="flex justify-between">
+                <span>初期支出合計</span>
+                <span className="font-medium text-orange-300">{(inputs.downPayment + results.closingCosts).toFixed(0)}万円</span>
+              </div>
+              <div className="border-t border-blue-700 pt-1 mt-1">
+                <div className="flex justify-between">
+                  <span>借入額</span>
+                  <span className="font-medium">{formatManYen(results.loanAmount)}</span>
+                </div>
               </div>
               <div className="flex justify-between">
                 <span>月返済額</span>
@@ -707,6 +731,15 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      {/* Disclaimer */}
+      <footer className="border-t border-blue-900 bg-slate-950 px-6 py-4 mt-4">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-xs text-slate-500 leading-relaxed">
+            【免責事項】本シミュレーターは不動産投資の参考情報を提供することを目的としており、投資助言・勧誘を行うものではありません。シミュレーション結果は入力値に基づく試算であり、将来の収益・損失を保証するものではありません。税制・金利・市況の変動により、実際の結果は大きく異なる場合があります。実際の投資判断は、税理士・ファイナンシャルプランナーなどの専門家にご相談のうえ、ご自身の責任においてお行いください。
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
