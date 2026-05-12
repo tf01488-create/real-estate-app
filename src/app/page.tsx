@@ -23,6 +23,7 @@ import {
   Settings,
   AlertTriangle,
   RotateCcw,
+  ChevronDown,
 } from "lucide-react";
 
 interface Inputs {
@@ -142,6 +143,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">(
     "cashflow"
   );
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputs((prev) => ({ ...prev, [key]: parseFloat(e.target.value) ?? 0 }));
@@ -285,7 +287,7 @@ export default function Home() {
             <Building2 className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white">不動産投資 収支シミュレーター</h1>
+            <h1 className="text-lg font-bold text-white">不動産投資　簡易シミュレーション</h1>
             <p className="text-xs text-blue-300">35年間のキャッシュフローを分析</p>
           </div>
         </div>
@@ -307,8 +309,16 @@ export default function Home() {
                 <RotateCcw className="w-3 h-3" />
                 リセット
               </button>
+              <button
+                type="button"
+                onClick={() => setSidebarOpen((v) => !v)}
+                className="lg:hidden flex items-center justify-center p-1 rounded-md text-blue-400 hover:text-blue-200 hover:bg-blue-800 transition-colors"
+                aria-label="設定を開閉"
+              >
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${sidebarOpen ? "rotate-180" : ""}`} />
+              </button>
             </div>
-            <div className="p-4 grid grid-cols-1 gap-4 overflow-y-auto max-h-[calc(100vh-200px)]">
+            <div className={`p-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-200px)] ${sidebarOpen ? "grid" : "hidden"} lg:grid`}>
               <InputField
                 label="物件価格"
                 description="購入総額（諸費用込みが理想）"
@@ -362,7 +372,7 @@ export default function Home() {
                 max={35}
                 presets={[15, 20, 25, 30, 35]}
               />
-              <div className="pt-1 border-t border-blue-800">
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800">
                 <p className="text-xs text-blue-400 font-medium">収入・費用</p>
               </div>
               <InputField
@@ -439,7 +449,7 @@ export default function Home() {
                 max={5}
                 presets={[0, 0.3, 0.5, 1.0]}
               />
-              <div className="pt-1 border-t border-blue-800">
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800">
                 <p className="text-xs text-blue-400 font-medium">売却シナリオ</p>
               </div>
               <InputField
