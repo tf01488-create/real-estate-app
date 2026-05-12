@@ -37,6 +37,8 @@ interface Inputs {
   propertyTax: number;
   otherCosts: number;
   rentDeclineRate: number;
+  saleYear: number;
+  salePrice: number;
 }
 
 function InputField({
@@ -128,6 +130,8 @@ const DEFAULT_INPUTS: Inputs = {
   propertyTax: 10,
   otherCosts: 3,
   rentDeclineRate: 0.5,
+  saleYear: 20,
+  salePrice: 2400,
 };
 
 export default function Home() {
@@ -217,7 +221,12 @@ export default function Home() {
     const firstYearCashflow = data[0].annualCashflow;
     const breakEvenIndex = data.findIndex((d) => d.cumulativeCashflow >= 0);
 
-    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex };
+    const saleIdx = Math.min(inputs.saleYear, 35) - 1;
+    const saleRow = data[saleIdx];
+    const saleNetProceeds = inputs.salePrice - saleRow.remainingLoan;
+    const saleTotalReturn = saleRow.cumulativeCashflow + saleNetProceeds;
+
+    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex, saleIdx, saleRow, saleNetProceeds, saleTotalReturn };
   }, [inputs]);
 
   const summaryCards = [
@@ -248,6 +257,13 @@ export default function Home() {
       icon: results.firstYearCashflow >= 0 ? TrendingUp : TrendingDown,
       color: results.firstYearCashflow >= 0 ? "text-emerald-400" : "text-red-400",
       bg: results.firstYearCashflow >= 0 ? "bg-emerald-900/60" : "bg-red-900/60",
+    },
+    {
+      label: `売却時総収益 (${inputs.saleYear}年目)`,
+      value: formatManYen(results.saleTotalReturn),
+      icon: results.saleTotalReturn >= 0 ? TrendingUp : TrendingDown,
+      color: results.saleTotalReturn >= 0 ? "text-yellow-400" : "text-red-400",
+      bg: results.saleTotalReturn >= 0 ? "bg-yellow-900/60" : "bg-red-900/60",
     },
   ];
 
@@ -409,6 +425,31 @@ export default function Home() {
                 max={5}
                 presets={[0, 0.3, 0.5, 1.0]}
               />
+              <div className="pt-1 border-t border-blue-800">
+                <p className="text-xs text-blue-400 font-medium">売却シナリオ</p>
+              </div>
+              <InputField
+                label="売却タイミング"
+                description="何年目に売却するか想定"
+                value={inputs.saleYear}
+                onChange={set("saleYear")}
+                onPresetClick={preset("saleYear")}
+                unit="年目"
+                step={1}
+                min={1}
+                max={35}
+                presets={[5, 10, 15, 20, 25, 30]}
+              />
+              <InputField
+                label="売却想定価格"
+                description="売却時の想定売却価格"
+                value={inputs.salePrice}
+                onChange={set("salePrice")}
+                onPresetClick={preset("salePrice")}
+                unit="万円"
+                step={50}
+                presets={[]}
+              />
             </div>
           </div>
 
@@ -447,7 +488,7 @@ export default function Home() {
           )}
 
           {/* Summary Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {summaryCards.map((card) => (
               <div
                 key={card.label}
@@ -520,7 +561,7 @@ export default function Home() {
                       <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#93c5fd" }} interval={4} />
                       <YAxis tick={{ fontSize: 11, fill: "#93c5fd" }} />
                       <Tooltip
-                        formatter={(value) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, "累積CF"]}
+                        formatter={(value, name) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, name]}
                         contentStyle={{ fontSize: 12, backgroundColor: "#1e3a5f", border: "1px solid #2563eb", color: "#e0f2fe" }}
                       />
                       <Legend wrapperStyle={{ fontSize: 12, color: "#93c5fd" }} />
@@ -529,6 +570,12 @@ export default function Home() {
                         stroke="#4b6a8f"
                         strokeDasharray="4 2"
                         label={{ value: "損益分岐", position: "insideTopLeft", fontSize: 11, fill: "#93c5fd" }}
+                      />
+                      <ReferenceLine
+                        x={`${inputs.saleYear}年目`}
+                        stroke="#facc15"
+                        strokeDasharray="4 2"
+                        label={{ value: "売却", position: "insideTopRight", fontSize: 11, fill: "#facc15" }}
                       />
                       <Line
                         type="monotone"
@@ -541,6 +588,28 @@ export default function Home() {
                       />
                     </LineChart>
                   </ResponsiveContainer>
+                  {/* Sale scenario summary */}
+                  <div className="mt-4 bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-3 grid grid-cols-3 gap-3 text-xs">
+                    <div>
+                      <p className="text-yellow-400 mb-0.5">売却益（税引前）</p>
+                      <p className="text-white font-semibold">{formatManYen(results.saleNetProceeds)}</p>
+                      <p className="text-yellow-600 mt-0.5">売却価格 − 残債</p>
+                    </div>
+                    <div>
+                      <p className="text-yellow-400 mb-0.5">累積CF（売却時点）</p>
+                      <p className={`font-semibold ${results.saleRow.cumulativeCashflow >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {formatManYen(results.saleRow.cumulativeCashflow)}
+                      </p>
+                      <p className="text-yellow-600 mt-0.5">{inputs.saleYear}年間の運用CF合計</p>
+                    </div>
+                    <div>
+                      <p className="text-yellow-400 mb-0.5">売却時総収益</p>
+                      <p className={`font-semibold ${results.saleTotalReturn >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {formatManYen(results.saleTotalReturn)}
+                      </p>
+                      <p className="text-yellow-600 mt-0.5">累積CF + 売却益</p>
+                    </div>
+                  </div>
                 </>
               )}
 
