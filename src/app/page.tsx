@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   LineChart,
   Line,
@@ -288,10 +289,16 @@ export default function Home() {
           <div className="p-2 bg-blue-500 rounded-lg">
             <Building2 className="w-5 h-5 text-white" />
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-lg font-bold text-white">不動産投資　簡易シミュレーション</h1>
             <p className="text-xs text-blue-300">35年間のキャッシュフローを分析</p>
           </div>
+          <Link
+            href="/articles"
+            className="text-xs text-blue-300 hover:text-blue-100 border border-blue-700 hover:border-blue-500 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+          >
+            コラム記事
+          </Link>
         </div>
       </header>
 
