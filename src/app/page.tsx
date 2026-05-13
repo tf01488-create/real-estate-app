@@ -24,6 +24,7 @@ import {
   AlertTriangle,
   RotateCcw,
   ChevronDown,
+  Info,
 } from "lucide-react";
 
 interface Inputs {
@@ -144,6 +145,7 @@ export default function Home() {
     "cashflow"
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
 
   const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputs((prev) => ({ ...prev, [key]: parseFloat(e.target.value) ?? 0 }));
@@ -292,6 +294,46 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Info Banner */}
+      <div className="bg-blue-900/40 border-b border-blue-800">
+        <div className="max-w-7xl mx-auto px-4">
+          <button
+            type="button"
+            onClick={() => setInfoOpen((v) => !v)}
+            className="w-full flex items-center gap-2 py-3 text-sm text-blue-300 hover:text-blue-100 transition-colors"
+          >
+            <Info className="w-4 h-4 shrink-0" />
+            <span className="font-medium">このシミュレーターでできること</span>
+            <ChevronDown className={`w-4 h-4 ml-auto transition-transform duration-200 ${infoOpen ? "rotate-180" : ""}`} />
+          </button>
+          {infoOpen && (
+            <div className="pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-blue-200">
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <BarChart2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">収支を35年間シミュレーション</p>
+                  <p className="text-blue-300">物件価格・ローン・家賃・各種費用を入力すると、年次のキャッシュフローと累積収支を自動で試算します。</p>
+                </div>
+              </div>
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">利回りと損益分岐を即確認</p>
+                  <p className="text-blue-300">表面・実質利回り、損益分岐年を自動計算。数値を変えながら条件の違いをすぐに比較できます。</p>
+                </div>
+              </div>
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <CalendarDays className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">売却シナリオも試算</p>
+                  <p className="text-blue-300">「何年目にいくらで売るか」を設定すると、運用収益と売却益を合算した総収益を確認できます。</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
         {/* Sidebar Inputs */}
