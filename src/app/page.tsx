@@ -59,7 +59,7 @@ function InputField({
 }: {
   label: string;
   description?: string;
-  value: number;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPresetClick: (v: number) => void;
   unit: string;
@@ -141,6 +141,9 @@ const DEFAULT_INPUTS: Inputs = {
 
 export default function Home() {
   const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS);
+  const [rawValues, setRawValues] = useState<Record<keyof Inputs, string>>(
+    () => Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>
+  );
 
   const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">(
     "cashflow"
@@ -148,11 +151,22 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
-  const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setInputs((prev) => ({ ...prev, [key]: parseFloat(e.target.value) ?? 0 }));
+  const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    setRawValues((prev) => ({ ...prev, [key]: raw }));
+    const v = parseFloat(raw);
+    if (!isNaN(v)) setInputs((prev) => ({ ...prev, [key]: v }));
+  };
 
-  const preset = (key: keyof Inputs) => (v: number) =>
+  const preset = (key: keyof Inputs) => (v: number) => {
     setInputs((prev) => ({ ...prev, [key]: v }));
+    setRawValues((prev) => ({ ...prev, [key]: String(v) }));
+  };
+
+  const handleReset = () => {
+    setInputs(DEFAULT_INPUTS);
+    setRawValues(Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>);
+  };
 
   const validationErrors = useMemo(() => {
     const errors: string[] = [];
@@ -351,7 +365,7 @@ export default function Home() {
               <span className="text-sm font-semibold text-blue-100 flex-1">物件・ローン設定</span>
               <button
                 type="button"
-                onClick={() => setInputs(DEFAULT_INPUTS)}
+                onClick={handleReset}
                 className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-200 transition-colors px-2 py-1 rounded-md hover:bg-blue-800"
                 title="デフォルト値にリセット"
               >
@@ -371,7 +385,7 @@ export default function Home() {
               <InputField
                 label="物件価格"
                 description="購入総額（諸費用込みが理想）"
-                value={inputs.propertyPrice}
+                value={rawValues.propertyPrice}
                 onChange={set("propertyPrice")}
                 onPresetClick={preset("propertyPrice")}
                 unit="万円"
@@ -381,7 +395,7 @@ export default function Home() {
               <InputField
                 label="頭金"
                 description="自己資金での初期支払い分"
-                value={inputs.downPayment}
+                value={rawValues.downPayment}
                 onChange={set("downPayment")}
                 onPresetClick={preset("downPayment")}
                 unit="万円"
@@ -391,7 +405,7 @@ export default function Home() {
               <InputField
                 label="購入時諸費用率"
                 description="仲介手数料・登記費用・ローン手数料などの合計（物件価格の5〜8%が目安）"
-                value={inputs.closingCostRate}
+                value={rawValues.closingCostRate}
                 onChange={set("closingCostRate")}
                 onPresetClick={preset("closingCostRate")}
                 unit="%"
@@ -402,7 +416,7 @@ export default function Home() {
               <InputField
                 label="ローン金利"
                 description="年利率（変動は現在1%台前半が多い）"
-                value={inputs.loanRate}
+                value={rawValues.loanRate}
                 onChange={set("loanRate")}
                 onPresetClick={preset("loanRate")}
                 unit="%"
@@ -413,7 +427,7 @@ export default function Home() {
               <InputField
                 label="返済期間"
                 description="ローン完済まで（最長35年）"
-                value={inputs.loanYears}
+                value={rawValues.loanYears}
                 onChange={set("loanYears")}
                 onPresetClick={preset("loanYears")}
                 unit="年"
@@ -427,7 +441,7 @@ export default function Home() {
               <InputField
                 label="月額家賃"
                 description="満室時の月額賃料収入"
-                value={inputs.monthlyRent}
+                value={rawValues.monthlyRent}
                 onChange={set("monthlyRent")}
                 onPresetClick={preset("monthlyRent")}
                 unit="万円"
@@ -437,7 +451,7 @@ export default function Home() {
               <InputField
                 label="空室率"
                 description="年間で空室になる期間の割合"
-                value={inputs.vacancyRate}
+                value={rawValues.vacancyRate}
                 onChange={set("vacancyRate")}
                 onPresetClick={preset("vacancyRate")}
                 unit="%"
@@ -448,7 +462,7 @@ export default function Home() {
               <InputField
                 label="管理費率"
                 description="賃料収入に対する管理会社手数料（5〜10%が一般的）"
-                value={inputs.managementFee}
+                value={rawValues.managementFee}
                 onChange={set("managementFee")}
                 onPresetClick={preset("managementFee")}
                 unit="%"
@@ -459,7 +473,7 @@ export default function Home() {
               <InputField
                 label="修繕費率"
                 description="物件価格に対する年間修繕費（老朽化に備えて積立）"
-                value={inputs.repairCost}
+                value={rawValues.repairCost}
                 onChange={set("repairCost")}
                 onPresetClick={preset("repairCost")}
                 unit="%/年"
@@ -470,7 +484,7 @@ export default function Home() {
               <InputField
                 label="固定資産税"
                 description="年間の固定資産税＋都市計画税の合計"
-                value={inputs.propertyTax}
+                value={rawValues.propertyTax}
                 onChange={set("propertyTax")}
                 onPresetClick={preset("propertyTax")}
                 unit="万円/年"
@@ -480,7 +494,7 @@ export default function Home() {
               <InputField
                 label="その他費用"
                 description="火災保険・管理組合費・雑費などの年間合計"
-                value={inputs.otherCosts}
+                value={rawValues.otherCosts}
                 onChange={set("otherCosts")}
                 onPresetClick={preset("otherCosts")}
                 unit="万円/年"
@@ -490,7 +504,7 @@ export default function Home() {
               <InputField
                 label="家賃下落率"
                 description="経年による年間賃料の下落率（築古で0.3〜1%が目安）"
-                value={inputs.rentDeclineRate}
+                value={rawValues.rentDeclineRate}
                 onChange={set("rentDeclineRate")}
                 onPresetClick={preset("rentDeclineRate")}
                 unit="%/年"
@@ -504,7 +518,7 @@ export default function Home() {
               <InputField
                 label="売却タイミング"
                 description="何年目に売却するか想定"
-                value={inputs.saleYear}
+                value={rawValues.saleYear}
                 onChange={set("saleYear")}
                 onPresetClick={preset("saleYear")}
                 unit="年目"
@@ -516,7 +530,7 @@ export default function Home() {
               <InputField
                 label="売却想定価格"
                 description="売却時の想定売却価格"
-                value={inputs.salePrice}
+                value={rawValues.salePrice}
                 onChange={set("salePrice")}
                 onPresetClick={preset("salePrice")}
                 unit="万円"
