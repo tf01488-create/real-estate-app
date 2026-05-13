@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   LineChart,
@@ -140,16 +140,36 @@ const DEFAULT_INPUTS: Inputs = {
 };
 
 export default function Home() {
-  const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS);
-  const [rawValues, setRawValues] = useState<Record<keyof Inputs, string>>(
-    () => Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>
-  );
+  const [inputs, setInputs] = useState<Inputs>(() => {
+    try {
+      const saved = sessionStorage.getItem("sim_inputs");
+      return saved ? { ...DEFAULT_INPUTS, ...JSON.parse(saved) } : DEFAULT_INPUTS;
+    } catch { return DEFAULT_INPUTS; }
+  });
+  const [rawValues, setRawValues] = useState<Record<keyof Inputs, string>>(() => {
+    try {
+      const saved = sessionStorage.getItem("sim_inputs");
+      const merged = saved ? { ...DEFAULT_INPUTS, ...JSON.parse(saved) } : DEFAULT_INPUTS;
+      return Object.fromEntries(Object.entries(merged).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>;
+    } catch {
+      return Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>;
+    }
+  });
 
-  const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">(
-    "cashflow"
-  );
+  const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">("cashflow");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [saleEnabled, setSaleEnabled] = useState(() => {
+    try { return sessionStorage.getItem("sim_sale_enabled") === "true"; } catch { return false; }
+  });
+
+  useEffect(() => {
+    try { sessionStorage.setItem("sim_inputs", JSON.stringify(inputs)); } catch {}
+  }, [inputs]);
+
+  useEffect(() => {
+    try { sessionStorage.setItem("sim_sale_enabled", String(saleEnabled)); } catch {}
+  }, [saleEnabled]);
 
   const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
@@ -162,8 +182,6 @@ export default function Home() {
     setInputs((prev) => ({ ...prev, [key]: v }));
     setRawValues((prev) => ({ ...prev, [key]: String(v) }));
   };
-
-  const [saleEnabled, setSaleEnabled] = useState(false);
 
   const handleReset = () => {
     setInputs(DEFAULT_INPUTS);
