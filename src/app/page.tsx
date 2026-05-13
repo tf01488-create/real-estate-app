@@ -116,6 +116,7 @@ function formatManYen(value: number) {
 }
 
 function calcMonthlyPayment(principal: number, annualRate: number, years: number) {
+  if (years <= 0 || principal <= 0) return 0;
   if (annualRate === 0) return principal / (years * 12);
   const r = annualRate / 100 / 12;
   const n = years * 12;
@@ -194,7 +195,6 @@ export default function Home() {
     if (inputs.propertyPrice <= 0) errors.push("物件価格を入力してください。");
     if (inputs.downPayment > inputs.propertyPrice) errors.push("頭金が物件価格を超えています。");
     if (inputs.monthlyRent <= 0) errors.push("月額家賃を入力してください。");
-    if (inputs.loanYears <= 0) errors.push("返済期間を入力してください。");
     return errors;
   }, [inputs]);
 
@@ -203,7 +203,7 @@ export default function Home() {
     const monthlyPayment = calcMonthlyPayment(loanAmount, inputs.loanRate, inputs.loanYears);
     const closingCosts = Math.round(inputs.propertyPrice * (inputs.closingCostRate / 100) * 10) / 10;
 
-    let remainingLoan = loanAmount;
+    let remainingLoan = inputs.loanYears <= 0 ? 0 : loanAmount;
     let cumulativeCashflow = -(inputs.downPayment + closingCosts);
     const data = [];
 
