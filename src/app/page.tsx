@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
 import {
   LineChart,
   Line,
@@ -23,11 +24,14 @@ import {
   Settings,
   AlertTriangle,
   RotateCcw,
+  ChevronDown,
+  Info,
 } from "lucide-react";
 
 interface Inputs {
   propertyPrice: number;
   downPayment: number;
+  closingCostRate: number;
   loanRate: number;
   loanYears: number;
   monthlyRent: number;
@@ -37,6 +41,8 @@ interface Inputs {
   propertyTax: number;
   otherCosts: number;
   rentDeclineRate: number;
+  saleYear: number;
+  salePrice: number;
 }
 
 function InputField({
@@ -53,7 +59,7 @@ function InputField({
 }: {
   label: string;
   description?: string;
-  value: number;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPresetClick: (v: number) => void;
   unit: string;
@@ -110,6 +116,7 @@ function formatManYen(value: number) {
 }
 
 function calcMonthlyPayment(principal: number, annualRate: number, years: number) {
+  if (years <= 0 || principal <= 0) return 0;
   if (annualRate === 0) return principal / (years * 12);
   const r = annualRate / 100 / 12;
   const n = years * 12;
@@ -119,6 +126,7 @@ function calcMonthlyPayment(principal: number, annualRate: number, years: number
 const DEFAULT_INPUTS: Inputs = {
   propertyPrice: 3000,
   downPayment: 600,
+  closingCostRate: 6,
   loanRate: 1.5,
   loanYears: 30,
   monthlyRent: 15,
@@ -128,36 +136,75 @@ const DEFAULT_INPUTS: Inputs = {
   propertyTax: 10,
   otherCosts: 3,
   rentDeclineRate: 0.5,
+  saleYear: 20,
+  salePrice: 2400,
 };
 
 export default function Home() {
-  const [inputs, setInputs] = useState<Inputs>(DEFAULT_INPUTS);
+  const [inputs, setInputs] = useState<Inputs>(() => {
+    try {
+      const saved = sessionStorage.getItem("sim_inputs");
+      return saved ? { ...DEFAULT_INPUTS, ...JSON.parse(saved) } : DEFAULT_INPUTS;
+    } catch { return DEFAULT_INPUTS; }
+  });
+  const [rawValues, setRawValues] = useState<Record<keyof Inputs, string>>(() => {
+    try {
+      const saved = sessionStorage.getItem("sim_inputs");
+      const merged = saved ? { ...DEFAULT_INPUTS, ...JSON.parse(saved) } : DEFAULT_INPUTS;
+      return Object.fromEntries(Object.entries(merged).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>;
+    } catch {
+      return Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>;
+    }
+  });
 
-  const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">(
-    "cashflow"
-  );
+  const [activeTab, setActiveTab] = useState<"cashflow" | "cumulative" | "balance">("cashflow");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [saleEnabled, setSaleEnabled] = useState(() => {
+    try { return sessionStorage.getItem("sim_sale_enabled") === "true"; } catch { return false; }
+  });
 
-  const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setInputs((prev) => ({ ...prev, [key]: parseFloat(e.target.value) ?? 0 }));
+  useEffect(() => {
+    try { sessionStorage.setItem("sim_inputs", JSON.stringify(inputs)); } catch {}
+  }, [inputs]);
 
-  const preset = (key: keyof Inputs) => (v: number) =>
+  useEffect(() => {
+    try { sessionStorage.setItem("sim_sale_enabled", String(saleEnabled)); } catch {}
+  }, [saleEnabled]);
+
+  const set = (key: keyof Inputs) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    setRawValues((prev) => ({ ...prev, [key]: raw }));
+    const v = parseFloat(raw);
+    if (!isNaN(v)) setInputs((prev) => ({ ...prev, [key]: v }));
+  };
+
+  const preset = (key: keyof Inputs) => (v: number) => {
     setInputs((prev) => ({ ...prev, [key]: v }));
+    setRawValues((prev) => ({ ...prev, [key]: String(v) }));
+  };
+
+  const handleReset = () => {
+    setInputs(DEFAULT_INPUTS);
+    setRawValues(Object.fromEntries(Object.entries(DEFAULT_INPUTS).map(([k, v]) => [k, String(v)])) as Record<keyof Inputs, string>);
+    setSaleEnabled(false);
+  };
 
   const validationErrors = useMemo(() => {
     const errors: string[] = [];
     if (inputs.propertyPrice <= 0) errors.push("物件価格を入力してください。");
     if (inputs.downPayment > inputs.propertyPrice) errors.push("頭金が物件価格を超えています。");
     if (inputs.monthlyRent <= 0) errors.push("月額家賃を入力してください。");
-    if (inputs.loanYears <= 0) errors.push("返済期間を入力してください。");
     return errors;
   }, [inputs]);
 
   const results = useMemo(() => {
     const loanAmount = inputs.propertyPrice - inputs.downPayment;
     const monthlyPayment = calcMonthlyPayment(loanAmount, inputs.loanRate, inputs.loanYears);
+    const closingCosts = Math.round(inputs.propertyPrice * (inputs.closingCostRate / 100) * 10) / 10;
 
-    let remainingLoan = loanAmount;
-    let cumulativeCashflow = -inputs.downPayment;
+    let remainingLoan = inputs.loanYears <= 0 ? 0 : loanAmount;
+    let cumulativeCashflow = -(inputs.downPayment + closingCosts);
     const data = [];
 
     for (let year = 1; year <= 35; year++) {
@@ -217,7 +264,12 @@ export default function Home() {
     const firstYearCashflow = data[0].annualCashflow;
     const breakEvenIndex = data.findIndex((d) => d.cumulativeCashflow >= 0);
 
-    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex };
+    const saleIdx = Math.min(inputs.saleYear, 35) - 1;
+    const saleRow = data[saleIdx];
+    const saleNetProceeds = inputs.salePrice - saleRow.remainingLoan;
+    const saleTotalReturn = saleRow.cumulativeCashflow + saleNetProceeds;
+
+    return { data, monthlyPaymentMan, grossYield, netYield, firstYearCashflow, loanAmount, breakEvenIndex, saleIdx, saleRow, saleNetProceeds, saleTotalReturn, closingCosts };
   }, [inputs]);
 
   const summaryCards = [
@@ -249,6 +301,13 @@ export default function Home() {
       color: results.firstYearCashflow >= 0 ? "text-emerald-400" : "text-red-400",
       bg: results.firstYearCashflow >= 0 ? "bg-emerald-900/60" : "bg-red-900/60",
     },
+    ...(saleEnabled ? [{
+      label: `売却時総収益 (${inputs.saleYear}年目)`,
+      value: formatManYen(results.saleTotalReturn),
+      icon: results.saleTotalReturn >= 0 ? TrendingUp : TrendingDown,
+      color: results.saleTotalReturn >= 0 ? "text-yellow-400" : "text-red-400",
+      bg: results.saleTotalReturn >= 0 ? "bg-yellow-900/60" : "bg-red-900/60",
+    }] : []),
   ];
 
   const tabs = [
@@ -265,12 +324,58 @@ export default function Home() {
           <div className="p-2 bg-blue-500 rounded-lg">
             <Building2 className="w-5 h-5 text-white" />
           </div>
-          <div>
-            <h1 className="text-lg font-bold text-white">不動産投資 収支シミュレーター</h1>
+          <div className="flex-1">
+            <h1 className="text-lg font-bold text-white">不動産投資　簡易シミュレーション</h1>
             <p className="text-xs text-blue-300">35年間のキャッシュフローを分析</p>
           </div>
+          <Link
+            href="/articles"
+            className="text-xs text-blue-300 hover:text-blue-100 border border-blue-700 hover:border-blue-500 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+          >
+            コラム記事
+          </Link>
         </div>
       </header>
+
+      {/* Info Banner */}
+      <div className="bg-blue-900/40 border-b border-blue-800">
+        <div className="max-w-7xl mx-auto px-4">
+          <button
+            type="button"
+            onClick={() => setInfoOpen((v) => !v)}
+            className="w-full flex items-center gap-2 py-3 text-sm text-blue-300 hover:text-blue-100 transition-colors"
+          >
+            <Info className="w-4 h-4 shrink-0" />
+            <span className="font-medium">このシミュレーターでできること</span>
+            <ChevronDown className={`w-4 h-4 ml-auto transition-transform duration-200 ${infoOpen ? "rotate-180" : ""}`} />
+          </button>
+          {infoOpen && (
+            <div className="pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-blue-200">
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <BarChart2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">収支を35年間シミュレーション</p>
+                  <p className="text-blue-300">物件価格・ローン・家賃・各種費用を入力すると、年次のキャッシュフローと累積収支を自動で試算します。</p>
+                </div>
+              </div>
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">利回りと損益分岐を即確認</p>
+                  <p className="text-blue-300">表面・実質利回り、損益分岐年を自動計算。数値を変えながら条件の違いをすぐに比較できます。</p>
+                </div>
+              </div>
+              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
+                <CalendarDays className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-blue-100 mb-0.5">売却シナリオも試算</p>
+                  <p className="text-blue-300">「何年目にいくらで売るか」を設定すると、運用収益と売却益を合算した総収益を確認できます。</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
         {/* Sidebar Inputs */}
@@ -281,19 +386,27 @@ export default function Home() {
               <span className="text-sm font-semibold text-blue-100 flex-1">物件・ローン設定</span>
               <button
                 type="button"
-                onClick={() => setInputs(DEFAULT_INPUTS)}
+                onClick={handleReset}
                 className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-200 transition-colors px-2 py-1 rounded-md hover:bg-blue-800"
                 title="デフォルト値にリセット"
               >
                 <RotateCcw className="w-3 h-3" />
                 リセット
               </button>
+              <button
+                type="button"
+                onClick={() => setSidebarOpen((v) => !v)}
+                className="lg:hidden flex items-center justify-center p-1 rounded-md text-blue-400 hover:text-blue-200 hover:bg-blue-800 transition-colors"
+                aria-label="設定を開閉"
+              >
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${sidebarOpen ? "rotate-180" : ""}`} />
+              </button>
             </div>
-            <div className="p-4 grid grid-cols-1 gap-4 overflow-y-auto max-h-[calc(100vh-200px)]">
+            <div className={`p-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-200px)] ${sidebarOpen ? "grid" : "hidden"} lg:grid`}>
               <InputField
                 label="物件価格"
                 description="購入総額（諸費用込みが理想）"
-                value={inputs.propertyPrice}
+                value={rawValues.propertyPrice}
                 onChange={set("propertyPrice")}
                 onPresetClick={preset("propertyPrice")}
                 unit="万円"
@@ -303,7 +416,7 @@ export default function Home() {
               <InputField
                 label="頭金"
                 description="自己資金での初期支払い分"
-                value={inputs.downPayment}
+                value={rawValues.downPayment}
                 onChange={set("downPayment")}
                 onPresetClick={preset("downPayment")}
                 unit="万円"
@@ -311,9 +424,20 @@ export default function Home() {
                 presets={[0, 100, 300, 500, 1000]}
               />
               <InputField
+                label="購入時諸費用率"
+                description="仲介手数料・登記費用・ローン手数料などの合計（物件価格の5〜8%が目安）"
+                value={rawValues.closingCostRate}
+                onChange={set("closingCostRate")}
+                onPresetClick={preset("closingCostRate")}
+                unit="%"
+                step={0.5}
+                max={15}
+                presets={[5, 6, 7, 8]}
+              />
+              <InputField
                 label="ローン金利"
                 description="年利率（変動は現在1%台前半が多い）"
-                value={inputs.loanRate}
+                value={rawValues.loanRate}
                 onChange={set("loanRate")}
                 onPresetClick={preset("loanRate")}
                 unit="%"
@@ -324,7 +448,7 @@ export default function Home() {
               <InputField
                 label="返済期間"
                 description="ローン完済まで（最長35年）"
-                value={inputs.loanYears}
+                value={rawValues.loanYears}
                 onChange={set("loanYears")}
                 onPresetClick={preset("loanYears")}
                 unit="年"
@@ -332,13 +456,13 @@ export default function Home() {
                 max={35}
                 presets={[15, 20, 25, 30, 35]}
               />
-              <div className="pt-1 border-t border-blue-800">
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800">
                 <p className="text-xs text-blue-400 font-medium">収入・費用</p>
               </div>
               <InputField
                 label="月額家賃"
                 description="満室時の月額賃料収入"
-                value={inputs.monthlyRent}
+                value={rawValues.monthlyRent}
                 onChange={set("monthlyRent")}
                 onPresetClick={preset("monthlyRent")}
                 unit="万円"
@@ -348,7 +472,7 @@ export default function Home() {
               <InputField
                 label="空室率"
                 description="年間で空室になる期間の割合"
-                value={inputs.vacancyRate}
+                value={rawValues.vacancyRate}
                 onChange={set("vacancyRate")}
                 onPresetClick={preset("vacancyRate")}
                 unit="%"
@@ -359,7 +483,7 @@ export default function Home() {
               <InputField
                 label="管理費率"
                 description="賃料収入に対する管理会社手数料（5〜10%が一般的）"
-                value={inputs.managementFee}
+                value={rawValues.managementFee}
                 onChange={set("managementFee")}
                 onPresetClick={preset("managementFee")}
                 unit="%"
@@ -370,7 +494,7 @@ export default function Home() {
               <InputField
                 label="修繕費率"
                 description="物件価格に対する年間修繕費（老朽化に備えて積立）"
-                value={inputs.repairCost}
+                value={rawValues.repairCost}
                 onChange={set("repairCost")}
                 onPresetClick={preset("repairCost")}
                 unit="%/年"
@@ -381,7 +505,7 @@ export default function Home() {
               <InputField
                 label="固定資産税"
                 description="年間の固定資産税＋都市計画税の合計"
-                value={inputs.propertyTax}
+                value={rawValues.propertyTax}
                 onChange={set("propertyTax")}
                 onPresetClick={preset("propertyTax")}
                 unit="万円/年"
@@ -391,7 +515,7 @@ export default function Home() {
               <InputField
                 label="その他費用"
                 description="火災保険・管理組合費・雑費などの年間合計"
-                value={inputs.otherCosts}
+                value={rawValues.otherCosts}
                 onChange={set("otherCosts")}
                 onPresetClick={preset("otherCosts")}
                 unit="万円/年"
@@ -401,7 +525,7 @@ export default function Home() {
               <InputField
                 label="家賃下落率"
                 description="経年による年間賃料の下落率（築古で0.3〜1%が目安）"
-                value={inputs.rentDeclineRate}
+                value={rawValues.rentDeclineRate}
                 onChange={set("rentDeclineRate")}
                 onPresetClick={preset("rentDeclineRate")}
                 unit="%/年"
@@ -409,16 +533,64 @@ export default function Home() {
                 max={5}
                 presets={[0, 0.3, 0.5, 1.0]}
               />
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800 flex items-center justify-between">
+                <p className="text-xs text-blue-400 font-medium">売却シナリオ</p>
+                <button
+                  type="button"
+                  onClick={() => setSaleEnabled((v) => !v)}
+                  className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none ${saleEnabled ? "bg-blue-500" : "bg-blue-800"}`}
+                  role="switch"
+                  aria-checked={saleEnabled}
+                >
+                  <span className={`inline-block h-4 w-4 rounded-full bg-white shadow transition-transform duration-200 ${saleEnabled ? "translate-x-4" : "translate-x-0"}`} />
+                </button>
+              </div>
+              {saleEnabled && (
+                <>
+                  <InputField
+                    label="売却タイミング"
+                    description="何年目に売却するか想定"
+                    value={rawValues.saleYear}
+                    onChange={set("saleYear")}
+                    onPresetClick={preset("saleYear")}
+                    unit="年目"
+                    step={1}
+                    min={1}
+                    max={35}
+                    presets={[5, 10, 15, 20, 25, 30]}
+                  />
+                  <InputField
+                    label="売却想定価格"
+                    description="売却時の想定売却価格"
+                    value={rawValues.salePrice}
+                    onChange={set("salePrice")}
+                    onPresetClick={preset("salePrice")}
+                    unit="万円"
+                    step={50}
+                    presets={[]}
+                  />
+                </>
+              )}
             </div>
           </div>
 
           {/* Loan Info */}
           <div className="mt-3 bg-blue-900 border border-blue-700 rounded-xl p-4 text-sm">
-            <p className="font-semibold text-blue-100 mb-2">ローン概要</p>
+            <p className="font-semibold text-blue-100 mb-2">初期費用・ローン概要</p>
             <div className="space-y-1 text-blue-200 text-xs">
               <div className="flex justify-between">
-                <span>借入額</span>
-                <span className="font-medium">{formatManYen(results.loanAmount)}</span>
+                <span>購入時諸費用</span>
+                <span className="font-medium text-orange-300">{results.closingCosts.toFixed(0)}万円</span>
+              </div>
+              <div className="flex justify-between">
+                <span>初期支出合計</span>
+                <span className="font-medium text-orange-300">{(inputs.downPayment + results.closingCosts).toFixed(0)}万円</span>
+              </div>
+              <div className="border-t border-blue-700 pt-1 mt-1">
+                <div className="flex justify-between">
+                  <span>借入額</span>
+                  <span className="font-medium">{formatManYen(results.loanAmount)}</span>
+                </div>
               </div>
               <div className="flex justify-between">
                 <span>月返済額</span>
@@ -447,7 +619,7 @@ export default function Home() {
           )}
 
           {/* Summary Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {summaryCards.map((card) => (
               <div
                 key={card.label}
@@ -520,7 +692,7 @@ export default function Home() {
                       <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#93c5fd" }} interval={4} />
                       <YAxis tick={{ fontSize: 11, fill: "#93c5fd" }} />
                       <Tooltip
-                        formatter={(value) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, "累積CF"]}
+                        formatter={(value, name) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, name]}
                         contentStyle={{ fontSize: 12, backgroundColor: "#1e3a5f", border: "1px solid #2563eb", color: "#e0f2fe" }}
                       />
                       <Legend wrapperStyle={{ fontSize: 12, color: "#93c5fd" }} />
@@ -530,6 +702,14 @@ export default function Home() {
                         strokeDasharray="4 2"
                         label={{ value: "損益分岐", position: "insideTopLeft", fontSize: 11, fill: "#93c5fd" }}
                       />
+                      {saleEnabled && (
+                        <ReferenceLine
+                          x={`${inputs.saleYear}年目`}
+                          stroke="#facc15"
+                          strokeDasharray="4 2"
+                          label={{ value: "売却", position: "insideTopRight", fontSize: 11, fill: "#facc15" }}
+                        />
+                      )}
                       <Line
                         type="monotone"
                         dataKey="cumulativeCashflow"
@@ -541,6 +721,30 @@ export default function Home() {
                       />
                     </LineChart>
                   </ResponsiveContainer>
+                  {/* Sale scenario summary */}
+                  {saleEnabled && (
+                    <div className="mt-4 bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-3 grid grid-cols-3 gap-3 text-xs">
+                      <div>
+                        <p className="text-yellow-400 mb-0.5">売却益（税引前）</p>
+                        <p className="text-white font-semibold">{formatManYen(results.saleNetProceeds)}</p>
+                        <p className="text-yellow-600 mt-0.5">売却価格 − 残債</p>
+                      </div>
+                      <div>
+                        <p className="text-yellow-400 mb-0.5">累積CF（売却時点）</p>
+                        <p className={`font-semibold ${results.saleRow.cumulativeCashflow >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                          {formatManYen(results.saleRow.cumulativeCashflow)}
+                        </p>
+                        <p className="text-yellow-600 mt-0.5">{inputs.saleYear}年間の運用CF合計</p>
+                      </div>
+                      <div>
+                        <p className="text-yellow-400 mb-0.5">売却時総収益</p>
+                        <p className={`font-semibold ${results.saleTotalReturn >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                          {formatManYen(results.saleTotalReturn)}
+                        </p>
+                        <p className="text-yellow-600 mt-0.5">累積CF + 売却益</p>
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
 
@@ -638,6 +842,21 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      {/* Disclaimer */}
+      <footer className="border-t border-blue-900 bg-slate-950 px-6 py-4 mt-4">
+        <div className="max-w-7xl mx-auto space-y-2">
+          <p className="text-xs text-slate-500 leading-relaxed">
+            【免責事項】本シミュレーターは不動産投資の参考情報を提供することを目的としており、投資助言・勧誘を行うものではありません。シミュレーション結果は入力値に基づく試算であり、将来の収益・損失を保証するものではありません。税制・金利・市況の変動により、実際の結果は大きく異なる場合があります。実際の投資判断は、税理士・ファイナンシャルプランナーなどの専門家にご相談のうえ、ご自身の責任においてお行いください。
+          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-slate-600">運営：川口哲也税理士事務所</p>
+            <Link href="/privacy-policy" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+              プライバシーポリシー
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
