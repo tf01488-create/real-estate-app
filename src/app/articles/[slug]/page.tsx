@@ -20,13 +20,67 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const BASE_URL = "https://fudousanunyou-toushi-simulators.kawaguchi-tetsuya-tax.com";
+
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": article.date,
+        "dateModified": article.date,
+        "author": {
+          "@type": "Organization",
+          "name": "川口哲也税理士事務所",
+          "url": BASE_URL,
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "川口哲也税理士事務所",
+          "url": BASE_URL,
+        },
+        "url": `${BASE_URL}/articles/${article.slug}`,
+        "mainEntityOfPage": `${BASE_URL}/articles/${article.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "トップ",
+            "item": BASE_URL,
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "コラム記事一覧",
+            "item": `${BASE_URL}/articles`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": article.title,
+            "item": `${BASE_URL}/articles/${article.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-slate-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="bg-blue-950 border-b border-blue-800 px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
           <Link href="/" className="p-2 bg-blue-500 rounded-lg hover:bg-blue-400 transition-colors">
