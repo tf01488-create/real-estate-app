@@ -316,8 +316,38 @@ export default function Home() {
     { key: "balance" as const, label: "残債推移" },
   ];
 
+  const BASE_URL = "https://fudousanunyou-toushi-simulators.kawaguchi-tetsuya-tax.com";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "不動産投資　簡易シミュレーション",
+        "description": "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。",
+        "url": BASE_URL,
+        "applicationCategory": "FinanceApplication",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+        "author": {
+          "@type": "Organization",
+          "name": "川口哲也税理士事務所",
+          "url": BASE_URL,
+        },
+      },
+      {
+        "@type": "Organization",
+        "name": "川口哲也税理士事務所",
+        "url": BASE_URL,
+        "email": "taxoffice@kawaguchi-tetsuya-tax.com",
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-slate-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <header className="bg-blue-950 border-b border-blue-800 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center gap-3">
