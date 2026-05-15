@@ -13,9 +13,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://fudousanunyou-toushi-simulators.kawaguchi-tetsuya-tax.com";
+
 export const metadata: Metadata = {
   title: "不動産投資　簡易シミュレーション",
-  description: "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。",
+  description: "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。川口哲也税理士事務所が運営。",
+  metadataBase: new URL(BASE_URL),
+  openGraph: {
+    type: "website",
+    url: BASE_URL,
+    siteName: "不動産投資　簡易シミュレーション",
+    title: "不動産投資　簡易シミュレーション",
+    description: "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。川口哲也税理士事務所が運営。",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "不動産投資　簡易シミュレーション",
+    description: "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。",
+  },
 };
 
 export default function RootLayout({
