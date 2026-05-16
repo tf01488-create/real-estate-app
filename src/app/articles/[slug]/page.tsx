@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${article.title} | 不動産投資　簡易シミュレーション`,
     description: article.excerpt,
+    ...(article.keywords ? { keywords: article.keywords } : {}),
   };
 }
 
