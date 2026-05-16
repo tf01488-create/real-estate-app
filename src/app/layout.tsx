@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     title: "不動産投資　簡易シミュレーション",
     description: "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。",
   },
+  verification: {
+    google: "Va4EUq-IqNhStuSkwZrtXVPtEaSbq4SrY-k_ifC8E78",
+  },
 };
 
 export default function RootLayout({
