@@ -61,6 +61,13 @@ export default function ArticlesPage() {
             </Link>
           ))}
         </div>
+
+        <footer className="mt-10 border-t border-blue-900 pt-6 flex flex-wrap gap-4 text-xs text-blue-500">
+          <Link href="/" className="hover:text-blue-300 transition-colors">トップ</Link>
+          <Link href="/about" className="hover:text-blue-300 transition-colors">運営者情報</Link>
+          <Link href="/contact" className="hover:text-blue-300 transition-colors">お問い合わせ</Link>
+          <Link href="/privacy-policy" className="hover:text-blue-300 transition-colors">プライバシーポリシー</Link>
+        </footer>
       </main>
     </div>
   );

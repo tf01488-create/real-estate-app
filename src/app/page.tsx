@@ -879,8 +879,14 @@ export default function Home() {
           <p className="text-xs text-slate-500 leading-relaxed">
             【免責事項】本シミュレーターは不動産投資の参考情報を提供することを目的としており、投資助言・勧誘を行うものではありません。シミュレーション結果は入力値に基づく試算であり、将来の収益・損失を保証するものではありません。税制・金利・市況の変動により、実際の結果は大きく異なる場合があります。実際の投資判断は、税理士・ファイナンシャルプランナーなどの専門家にご相談のうえ、ご自身の責任においてお行いください。
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <p className="text-xs text-slate-600">運営：川口哲也税理士事務所</p>
+            <Link href="/about" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+              運営者情報
+            </Link>
+            <Link href="/contact" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+              お問い合わせ
+            </Link>
             <Link href="/privacy-policy" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
               プライバシーポリシー
             </Link>
