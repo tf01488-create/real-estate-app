@@ -138,6 +138,14 @@ export default async function ArticlePage({ params }: Props) {
             シミュレーターを使う →
           </Link>
         </div>
+
+        <footer className="mt-8 flex flex-wrap gap-4 text-xs text-blue-500">
+          <Link href="/" className="hover:text-blue-300 transition-colors">トップ</Link>
+          <Link href="/articles" className="hover:text-blue-300 transition-colors">コラム記事一覧</Link>
+          <Link href="/about" className="hover:text-blue-300 transition-colors">運営者情報</Link>
+          <Link href="/contact" className="hover:text-blue-300 transition-colors">お問い合わせ</Link>
+          <Link href="/privacy-policy" className="hover:text-blue-300 transition-colors">プライバシーポリシー</Link>
+        </footer>
       </main>
     </div>
   );
