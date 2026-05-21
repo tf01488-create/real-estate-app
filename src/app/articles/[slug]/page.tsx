@@ -120,7 +120,13 @@ export default async function ArticlePage({ params }: Props) {
           <div className="space-y-5">
             {article.content.map((paragraph, i) => (
               <p key={i} className="text-sm text-blue-100 leading-relaxed whitespace-pre-line">
-                {paragraph}
+                {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+                  j % 2 === 1 ? (
+                    <strong key={j} className="font-bold text-yellow-300">{part}</strong>
+                  ) : (
+                    part
+                  )
+                )}
               </p>
             ))}
           </div>
