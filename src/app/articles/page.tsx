@@ -48,12 +48,12 @@ export default function ArticlesPage() {
               className="group bg-blue-950 border border-blue-800 rounded-xl overflow-hidden hover:border-blue-500 hover:bg-blue-900/60 transition-all flex flex-col sm:flex-row"
             >
               {article.image && (
-                <div className="relative w-full sm:w-48 h-36 sm:h-auto shrink-0 bg-blue-900">
+                <div className="relative w-full sm:w-48 h-36 sm:h-36 shrink-0 bg-blue-900 flex items-center justify-center">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 640px) 100vw, 192px"
                   />
                 </div>
