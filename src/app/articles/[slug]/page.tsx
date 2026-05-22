@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { articles, getArticleBySlug } from "@/data/articles";
 import { Building2, ChevronLeft } from "lucide-react";
@@ -108,27 +109,39 @@ export default async function ArticlePage({ params }: Props) {
           記事一覧に戻る
         </Link>
 
-        <article className="bg-blue-950 border border-blue-800 rounded-xl p-6 sm:p-8">
-          <p className="text-xs text-blue-400 mb-3">{article.date}</p>
-          <h2 className="text-xl sm:text-2xl font-bold text-white leading-snug mb-6">
-            {article.title}
-          </h2>
-          <p className="text-sm text-blue-300 border-l-2 border-blue-600 pl-4 mb-8 leading-relaxed">
-            {article.excerpt}
-          </p>
+        <article className="bg-blue-950 border border-blue-800 rounded-xl overflow-hidden">
+          <div className="relative w-full h-52 sm:h-72 bg-blue-900">
+            <Image
+              src={`/images/articles/${article.slug}.jpg`}
+              alt={article.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
+          </div>
+          <div className="p-6 sm:p-8">
+            <p className="text-xs text-blue-400 mb-3">{article.date}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-white leading-snug mb-6">
+              {article.title}
+            </h2>
+            <p className="text-sm text-blue-300 border-l-2 border-blue-600 pl-4 mb-8 leading-relaxed">
+              {article.excerpt}
+            </p>
 
-          <div className="space-y-5">
-            {article.content.map((paragraph, i) => (
-              <p key={i} className="text-sm text-blue-100 leading-relaxed whitespace-pre-line">
-                {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
-                  j % 2 === 1 ? (
-                    <strong key={j} className="font-bold text-yellow-300">{part}</strong>
-                  ) : (
-                    part
-                  )
-                )}
-              </p>
-            ))}
+            <div className="space-y-5">
+              {article.content.map((paragraph, i) => (
+                <p key={i} className="text-sm text-blue-100 leading-relaxed whitespace-pre-line">
+                  {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+                    j % 2 === 1 ? (
+                      <strong key={j} className="font-bold text-yellow-300">{part}</strong>
+                    ) : (
+                      part
+                    )
+                  )}
+                </p>
+              ))}
+            </div>
           </div>
         </article>
 
