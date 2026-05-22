@@ -96,16 +96,15 @@ export default async function ArticlePage({ params }: Props) {
 
         <article className="bg-blue-950 border border-blue-800 rounded-xl overflow-hidden">
           {article.image && (
-            <div className="relative w-full h-52 sm:h-72 bg-blue-900">
-              <Image
-                src={article.image}
-                alt={article.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 896px) 100vw, 896px"
-              />
-            </div>
+            <Image
+              src={article.image}
+              alt={article.title}
+              width={1200}
+              height={630}
+              className="w-full h-auto"
+              priority
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
           )}
           <div className="p-6 sm:p-8">
             <p className="text-xs text-blue-400 mb-3">{article.date}</p>
