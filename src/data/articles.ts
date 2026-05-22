@@ -5,6 +5,7 @@ export interface Article {
   excerpt: string;
   content: string[];
   keywords?: string[];
+  image?: string;
 }
 
 export const articles: Article[] = [
@@ -43,6 +44,7 @@ export const articles: Article[] = [
   },
   {
     slug: "how-to-read-cashflow",
+    image: "/images/articles/how-to-read-cashflow.png",
     title: "キャッシュフロー計算の読み方：NOI・CF・累積CFの違いとは",
     date: "2026-05-13",
     excerpt:
@@ -57,6 +59,7 @@ export const articles: Article[] = [
   },
   {
     slug: "tax-saving-real-estate-investment",
+    image: "/images/articles/tax-saving-real-estate-investment.png",
     title: "不動産投資で節税できる仕組みを徹底解説：減価償却・損益通算とは",
     date: "2026-05-14",
     excerpt:
@@ -208,6 +211,7 @@ export const articles: Article[] = [
   },
   {
     slug: "common-mistakes-real-estate-beginners",
+    image: "/images/articles/common-mistakes-real-estate-beginners.png",
     title: "不動産投資で失敗する人の共通パターン7選と回避策",
     date: "2026-05-14",
     excerpt:
