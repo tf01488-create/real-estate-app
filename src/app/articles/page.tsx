@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { articles } from "@/data/articles";
 import { Building2, BookOpen, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -44,9 +45,18 @@ export default function ArticlesPage() {
             <Link
               key={article.slug}
               href={`/articles/${article.slug}`}
-              className="group bg-blue-950 border border-blue-800 rounded-xl p-5 hover:border-blue-500 hover:bg-blue-900/60 transition-all"
+              className="group bg-blue-950 border border-blue-800 rounded-xl overflow-hidden hover:border-blue-500 hover:bg-blue-900/60 transition-all flex flex-col sm:flex-row"
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="relative w-full sm:w-48 h-36 sm:h-auto shrink-0 bg-blue-900">
+                <Image
+                  src={`/images/articles/${article.slug}.jpg`}
+                  alt={article.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 192px"
+                />
+              </div>
+              <div className="flex-1 min-w-0 p-5 flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-blue-400 mb-1.5">{article.date}</p>
                   <h2 className="text-base font-semibold text-white group-hover:text-blue-200 transition-colors leading-snug mb-2">
