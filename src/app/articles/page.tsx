@@ -47,15 +47,17 @@ export default function ArticlesPage() {
               href={`/articles/${article.slug}`}
               className="group bg-blue-950 border border-blue-800 rounded-xl overflow-hidden hover:border-blue-500 hover:bg-blue-900/60 transition-all flex flex-col sm:flex-row"
             >
-              <div className="relative w-full sm:w-48 h-36 sm:h-auto shrink-0 bg-blue-900">
-                <Image
-                  src={`/images/articles/${article.slug}.jpg`}
-                  alt={article.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 192px"
-                />
-              </div>
+              {article.image && (
+                <div className="relative w-full sm:w-48 h-36 sm:h-auto shrink-0 bg-blue-900">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 192px"
+                  />
+                </div>
+              )}
               <div className="flex-1 min-w-0 p-5 flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-blue-400 mb-1.5">{article.date}</p>

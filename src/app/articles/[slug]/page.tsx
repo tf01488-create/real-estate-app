@@ -54,24 +54,9 @@ export default async function ArticlePage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "トップ",
-            "item": BASE_URL,
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "コラム記事一覧",
-            "item": `${BASE_URL}/articles`,
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": article.title,
-            "item": `${BASE_URL}/articles/${article.slug}`,
-          },
+          { "@type": "ListItem", "position": 1, "name": "トップ", "item": BASE_URL },
+          { "@type": "ListItem", "position": 2, "name": "コラム記事一覧", "item": `${BASE_URL}/articles` },
+          { "@type": "ListItem", "position": 3, "name": article.title, "item": `${BASE_URL}/articles/${article.slug}` },
         ],
       },
     ],
@@ -110,16 +95,18 @@ export default async function ArticlePage({ params }: Props) {
         </Link>
 
         <article className="bg-blue-950 border border-blue-800 rounded-xl overflow-hidden">
-          <div className="relative w-full h-52 sm:h-72 bg-blue-900">
-            <Image
-              src={`/images/articles/${article.slug}.jpg`}
-              alt={article.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 896px) 100vw, 896px"
-            />
-          </div>
+          {article.image && (
+            <div className="relative w-full h-52 sm:h-72 bg-blue-900">
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 896px) 100vw, 896px"
+              />
+            </div>
+          )}
           <div className="p-6 sm:p-8">
             <p className="text-xs text-blue-400 mb-3">{article.date}</p>
             <h2 className="text-xl sm:text-2xl font-bold text-white leading-snug mb-6">
