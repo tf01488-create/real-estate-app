@@ -29,6 +29,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-rental-consumption-tax",
+    image: "/images/articles/public/images/articles/real-estate-rental-consumption-tax.jpg",
     title: "不動産賃貸業における消費税の取り扱い。課税？非課税？",
     date: "2026-05-22",
     keywords: ["不動産 賃貸 消費税"],
@@ -47,6 +48,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-investment-basics",
+    image: "/images/articles/public/images/articles/real-estate-investment-basics.jpg",
     title: "不動産投資の基本：初心者が知っておくべき5つのポイント",
     date: "2026-05-13",
     excerpt:
@@ -93,6 +95,7 @@ export const articles: Article[] = [
   },
   {
     slug: "tokyo-vs-local-real-estate",
+    image: "/images/articles/public/images/articles/tokyo-vs-local-real-estate.jpg",
     title: "都市部 vs 地方：不動産投資はどちらが有利か？エリア選びの考え方",
     date: "2026-05-14",
     excerpt:
@@ -107,6 +110,7 @@ export const articles: Article[] = [
   },
   {
     slug: "myhome-sale-inheritance-tax-exemptions",
+    image: "/images/articles/public/images/articles/myhome-sale-inheritance-tax-exemptions.jpg",
     title: "マイホームの売却・相続等で使える特例は？お得な税制とは",
     date: "2026-05-21",
     keywords: ["マイホーム 売却 特例"],
@@ -142,6 +146,7 @@ export const articles: Article[] = [
   },
   {
     slug: "when-to-sell-real-estate",
+    image: "/images/articles/public/images/articles/when-to-sell-real-estate.jpg",
     title: "不動産売却時期の見極め方・判断基準とは",
     date: "2026-05-19",
     keywords: ["不動産 売却"],
@@ -159,6 +164,7 @@ export const articles: Article[] = [
   },
   {
     slug: "rental-property-valuation-reform-2027",
+    image: "/images/articles/public/images/articles/rental-property-valuation-reform-2027.jpg",
     title: "貸付用不動産の評価方法見直し、改正内容に注目｜5年縛りルール",
     date: "2026-05-18",
     keywords: ["不動産 相続税対策", "貸付用不動産 評価", "不動産小口化商品 相続"],
@@ -210,6 +216,7 @@ export const articles: Article[] = [
   },
   {
     slug: "one-room-investment-risks",
+    image: "/images/articles/public/images/articles/one-room-investment-risks.jpg",
     title: "ワンルーム投資のリスクとは？これだけは押さえておきたいこと",
     date: "2026-05-16",
     keywords: ["ワンルーム投資", "リスク"],
