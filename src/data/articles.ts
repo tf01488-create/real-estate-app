@@ -129,6 +129,7 @@ export const articles: Article[] = [
   },
   {
     slug: "housing-loan-limit-income-4m",
+    image: "/images/articles/housing-loan-limit-income-4m.png",
     title: "年収400万円の住宅ローン借りられる限界額はいくら？",
     date: "2026-05-20",
     keywords: ["不動産 住宅ローン"],
@@ -182,6 +183,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-tax-saving-effect",
+    image: "/images/articles/real-estate-tax-saving-effect.png",
     title: "不動産節税、その節税効果はどれくらい？",
     date: "2026-05-17",
     keywords: ["不動産節税"],
