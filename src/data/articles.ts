@@ -11,6 +11,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "property-tax-how-it-works",
+    image: "/images/articles/real-estate-fixed-property-tax.jpg",
     title: "不動産の固定資産税はどうやって決まっている？",
     date: "2026-05-24",
     keywords: ["不動産 固定資産税"],
