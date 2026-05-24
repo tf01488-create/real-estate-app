@@ -11,6 +11,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "repair-vs-capital-expenditure-rental",
+    image: "/images/articles/repair-vs-capital-expenditure-rental.jpg",
     title: "不動産賃貸業における修繕費と資本的支出の判断基準について解説",
     date: "2026-05-23",
     keywords: ["不動産 修繕費"],
@@ -201,6 +202,7 @@ export const articles: Article[] = [
   },
   {
     slug: "rent-vs-buy",
+    image: "/images/articles/rent-vs-buy.png",
     title: "不動産は、賃貸か持ち家か",
     date: "2026-05-17",
     keywords: ["賃貸", "持ち家", "どちらがお得"],
