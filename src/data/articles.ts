@@ -11,6 +11,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "real-estate-bank-evaluation-financial-statement",
+    image: "/images/articles/real-estate-bank-evaluation-financial-statement.jpg",
     title: "不動産投資　銀行評価に通る決算書とは？",
     date: "2026-05-25",
     keywords: ["不動産投資 銀行評価"],
