@@ -14,6 +14,7 @@ export const articles: Article[] = [
     title: "路線価ってなに？おさらいしておきたいポイント",
     date: "2026-05-26",
     keywords: ["路線価 宅地"],
+    image: "/images/articles/what-is-rosenka-land-valuation.png",
     excerpt:
       "路線価は相続税・贈与税の申告で使われる土地の評価基準です。税理士業務では毎年欠かせない数値ですが、路線価を知っておくと土地の相場感の把握や相続対策にも役立ちます。路線価の基本とおさえておきたいポイントを解説します。",
     content: [
