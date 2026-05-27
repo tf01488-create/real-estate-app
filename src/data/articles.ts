@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "real-estate-income-calculation-points",
     title: "不動産所得の計算のポイント",
     date: "2026-05-27",
+    image: "/images/articles/real-estate-income-calculation-points.jpg",
     keywords: ["不動産所得 税理士"],
     excerpt:
       "確定申告は税理士に任せているオーナーも多いですが、自身で概算を把握できると経営判断の質が上がります。不動産所得の計算構造・収入と経費の範囲・青色申告の活用など、オーナーが知っておきたいポイントを税理士が解説します。",
