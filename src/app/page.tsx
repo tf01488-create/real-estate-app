@@ -70,11 +70,11 @@ function InputField({
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-xs font-medium text-blue-200">{label}</label>
+      <label className="text-xs font-medium text-gray-700">{label}</label>
       {description && (
-        <p className="text-xs text-blue-400 leading-tight">{description}</p>
+        <p className="text-xs text-gray-500 leading-tight">{description}</p>
       )}
-      <div className="flex items-center gap-1 border border-blue-700 rounded-lg px-2 py-1.5 bg-blue-900 focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-500 transition">
+      <div className="flex items-center gap-1 border border-gray-300 rounded-lg px-2 py-1.5 bg-white focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition">
         <input
           type="number"
           value={value}
@@ -82,9 +82,9 @@ function InputField({
           min={min}
           max={max}
           step={step}
-          className="w-full text-sm text-right outline-none bg-transparent text-white"
+          className="w-full text-sm text-right outline-none bg-transparent text-gray-900"
         />
-        <span className="text-xs text-blue-400 whitespace-nowrap">{unit}</span>
+        <span className="text-xs text-gray-500 whitespace-nowrap">{unit}</span>
       </div>
       {presets && (
         <div className="flex gap-1 flex-wrap mt-0.5">
@@ -95,8 +95,8 @@ function InputField({
               onClick={() => onPresetClick(p)}
               className={`text-xs px-2 py-0.5 rounded-full border transition-colors ${
                 value === p
-                  ? "bg-blue-500 border-blue-400 text-white font-semibold"
-                  : "bg-blue-900 border-blue-700 text-blue-300 hover:bg-blue-700 hover:border-blue-500 hover:text-blue-100"
+                  ? "bg-blue-600 border-blue-600 text-white font-semibold"
+                  : "bg-gray-100 border-gray-300 text-gray-600 hover:bg-blue-50 hover:border-blue-400 hover:text-blue-700"
               }`}
             >
               {p}
@@ -277,36 +277,36 @@ export default function Home() {
       label: "損益分岐",
       value: results.breakEvenIndex >= 0 ? `${results.breakEvenIndex + 1}年目` : "35年超",
       icon: CalendarDays,
-      color: results.breakEvenIndex >= 0 ? "text-blue-400" : "text-slate-400",
-      bg: results.breakEvenIndex >= 0 ? "bg-blue-900/60" : "bg-slate-800",
+      color: results.breakEvenIndex >= 0 ? "text-blue-600" : "text-gray-400",
+      bg: results.breakEvenIndex >= 0 ? "bg-blue-100" : "bg-gray-100",
     },
     {
       label: "表面利回り",
       value: `${results.grossYield.toFixed(2)}%`,
       icon: BarChart2,
-      color: "text-green-400",
-      bg: "bg-green-900/60",
+      color: "text-green-600",
+      bg: "bg-green-100",
     },
     {
       label: "実質利回り",
       value: `${results.netYield.toFixed(2)}%`,
       icon: TrendingUp,
-      color: "text-emerald-400",
-      bg: "bg-emerald-900/60",
+      color: "text-emerald-600",
+      bg: "bg-emerald-100",
     },
     {
       label: "初年度CF",
       value: `${results.firstYearCashflow.toFixed(1)}万円`,
       icon: results.firstYearCashflow >= 0 ? TrendingUp : TrendingDown,
-      color: results.firstYearCashflow >= 0 ? "text-emerald-400" : "text-red-400",
-      bg: results.firstYearCashflow >= 0 ? "bg-emerald-900/60" : "bg-red-900/60",
+      color: results.firstYearCashflow >= 0 ? "text-emerald-600" : "text-red-600",
+      bg: results.firstYearCashflow >= 0 ? "bg-emerald-100" : "bg-red-100",
     },
     ...(saleEnabled ? [{
       label: `売却時総収益 (${inputs.saleYear}年目)`,
       value: formatManYen(results.saleTotalReturn),
       icon: results.saleTotalReturn >= 0 ? TrendingUp : TrendingDown,
-      color: results.saleTotalReturn >= 0 ? "text-yellow-400" : "text-red-400",
-      bg: results.saleTotalReturn >= 0 ? "bg-yellow-900/60" : "bg-red-900/60",
+      color: results.saleTotalReturn >= 0 ? "text-yellow-600" : "text-red-600",
+      bg: results.saleTotalReturn >= 0 ? "bg-yellow-100" : "bg-red-100",
     }] : []),
   ];
 
@@ -343,24 +343,24 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-gray-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Header */}
-      <header className="bg-blue-950 border-b border-blue-800 px-6 py-4">
+      <header className="bg-blue-600 border-b border-blue-700 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <div className="p-2 bg-blue-500 rounded-lg">
+          <div className="p-2 bg-white/20 rounded-lg">
             <Building2 className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1">
             <h1 className="text-lg font-bold text-white">不動産投資　簡易シミュレーション</h1>
-            <p className="text-xs text-blue-300">35年間のキャッシュフローを分析</p>
+            <p className="text-xs text-blue-100">35年間のキャッシュフローを分析</p>
           </div>
           <Link
             href="/articles"
-            className="text-xs text-blue-300 hover:text-blue-100 border border-blue-700 hover:border-blue-500 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             コラム記事
           </Link>
@@ -368,38 +368,38 @@ export default function Home() {
       </header>
 
       {/* Info Banner */}
-      <div className="bg-blue-900/40 border-b border-blue-800">
+      <div className="bg-blue-50 border-b border-blue-200">
         <div className="max-w-7xl mx-auto px-4">
           <button
             type="button"
             onClick={() => setInfoOpen((v) => !v)}
-            className="w-full flex items-center gap-2 py-3 text-sm text-blue-300 hover:text-blue-100 transition-colors"
+            className="w-full flex items-center gap-2 py-3 text-sm text-blue-700 hover:text-blue-900 transition-colors"
           >
             <Info className="w-4 h-4 shrink-0" />
             <span className="font-medium">このシミュレーターでできること</span>
             <ChevronDown className={`w-4 h-4 ml-auto transition-transform duration-200 ${infoOpen ? "rotate-180" : ""}`} />
           </button>
           {infoOpen && (
-            <div className="pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-blue-200">
-              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
-                <BarChart2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+            <div className="pb-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-gray-700">
+              <div className="bg-white border border-blue-100 rounded-lg p-3 flex gap-2">
+                <BarChart2 className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-blue-100 mb-0.5">収支を35年間シミュレーション</p>
-                  <p className="text-blue-300">物件価格・ローン・家賃・各種費用を入力すると、年次のキャッシュフローと累積収支を自動で試算します。</p>
+                  <p className="font-semibold text-gray-800 mb-0.5">収支を35年間シミュレーション</p>
+                  <p className="text-gray-500">物件価格・ローン・家賃・各種費用を入力すると、年次のキャッシュフローと累積収支を自動で試算します。</p>
                 </div>
               </div>
-              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
-                <TrendingUp className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="bg-white border border-blue-100 rounded-lg p-3 flex gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-blue-100 mb-0.5">利回りと損益分岐を即確認</p>
-                  <p className="text-blue-300">表面・実質利回り、損益分岐年を自動計算。数値を変えながら条件の違いをすぐに比較できます。</p>
+                  <p className="font-semibold text-gray-800 mb-0.5">利回りと損益分岐を即確認</p>
+                  <p className="text-gray-500">表面・実質利回り、損益分岐年を自動計算。数値を変えながら条件の違いをすぐに比較できます。</p>
                 </div>
               </div>
-              <div className="bg-blue-900/60 rounded-lg p-3 flex gap-2">
-                <CalendarDays className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+              <div className="bg-white border border-blue-100 rounded-lg p-3 flex gap-2">
+                <CalendarDays className="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-semibold text-blue-100 mb-0.5">売却シナリオも試算</p>
-                  <p className="text-blue-300">「何年目にいくらで売るか」を設定すると、運用収益と売却益を合算した総収益を確認できます。</p>
+                  <p className="font-semibold text-gray-800 mb-0.5">売却シナリオも試算</p>
+                  <p className="text-gray-500">「何年目にいくらで売るか」を設定すると、運用収益と売却益を合算した総収益を確認できます。</p>
                 </div>
               </div>
             </div>
@@ -410,14 +410,14 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6">
         {/* Sidebar Inputs */}
         <aside className="w-full lg:w-72 flex-shrink-0">
-          <div className="bg-blue-950 rounded-xl border border-blue-800 overflow-hidden">
-            <div className="px-4 py-3 bg-blue-900 border-b border-blue-800 flex items-center gap-2">
-              <Settings className="w-4 h-4 text-blue-300" />
-              <span className="text-sm font-semibold text-blue-100 flex-1">物件・ローン設定</span>
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center gap-2">
+              <Settings className="w-4 h-4 text-blue-500" />
+              <span className="text-sm font-semibold text-gray-800 flex-1">物件・ローン設定</span>
               <button
                 type="button"
                 onClick={handleReset}
-                className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-200 transition-colors px-2 py-1 rounded-md hover:bg-blue-800"
+                className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 transition-colors px-2 py-1 rounded-md hover:bg-gray-200"
                 title="デフォルト値にリセット"
               >
                 <RotateCcw className="w-3 h-3" />
@@ -426,7 +426,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setSidebarOpen((v) => !v)}
-                className="lg:hidden flex items-center justify-center p-1 rounded-md text-blue-400 hover:text-blue-200 hover:bg-blue-800 transition-colors"
+                className="lg:hidden flex items-center justify-center p-1 rounded-md text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-colors"
                 aria-label="設定を開閉"
               >
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${sidebarOpen ? "rotate-180" : ""}`} />
@@ -486,8 +486,8 @@ export default function Home() {
                 max={35}
                 presets={[15, 20, 25, 30, 35]}
               />
-              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800">
-                <p className="text-xs text-blue-400 font-medium">収入・費用</p>
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-gray-200">
+                <p className="text-xs text-gray-500 font-medium">収入・費用</p>
               </div>
               <InputField
                 label="月額家賃"
@@ -563,12 +563,12 @@ export default function Home() {
                 max={5}
                 presets={[0, 0.3, 0.5, 1.0]}
               />
-              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-blue-800 flex items-center justify-between">
-                <p className="text-xs text-blue-400 font-medium">売却シナリオ</p>
+              <div className="col-span-2 lg:col-span-1 pt-1 border-t border-gray-200 flex items-center justify-between">
+                <p className="text-xs text-gray-500 font-medium">売却シナリオ</p>
                 <button
                   type="button"
                   onClick={() => setSaleEnabled((v) => !v)}
-                  className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none ${saleEnabled ? "bg-blue-500" : "bg-blue-800"}`}
+                  className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none ${saleEnabled ? "bg-blue-600" : "bg-gray-300"}`}
                   role="switch"
                   aria-checked={saleEnabled}
                 >
@@ -605,30 +605,30 @@ export default function Home() {
           </div>
 
           {/* Loan Info */}
-          <div className="mt-3 bg-blue-900 border border-blue-700 rounded-xl p-4 text-sm">
-            <p className="font-semibold text-blue-100 mb-2">初期費用・ローン概要</p>
-            <div className="space-y-1 text-blue-200 text-xs">
+          <div className="mt-3 bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
+            <p className="font-semibold text-gray-800 mb-2">初期費用・ローン概要</p>
+            <div className="space-y-1 text-gray-600 text-xs">
               <div className="flex justify-between">
                 <span>購入時諸費用</span>
-                <span className="font-medium text-orange-300">{results.closingCosts.toFixed(0)}万円</span>
+                <span className="font-medium text-orange-600">{results.closingCosts.toFixed(0)}万円</span>
               </div>
               <div className="flex justify-between">
                 <span>初期支出合計</span>
-                <span className="font-medium text-orange-300">{(inputs.downPayment + results.closingCosts).toFixed(0)}万円</span>
+                <span className="font-medium text-orange-600">{(inputs.downPayment + results.closingCosts).toFixed(0)}万円</span>
               </div>
-              <div className="border-t border-blue-700 pt-1 mt-1">
+              <div className="border-t border-blue-200 pt-1 mt-1">
                 <div className="flex justify-between">
                   <span>借入額</span>
-                  <span className="font-medium">{formatManYen(results.loanAmount)}</span>
+                  <span className="font-medium text-gray-800">{formatManYen(results.loanAmount)}</span>
                 </div>
               </div>
               <div className="flex justify-between">
                 <span>月返済額</span>
-                <span className="font-medium">{results.monthlyPaymentMan.toFixed(1)}万円</span>
+                <span className="font-medium text-gray-800">{results.monthlyPaymentMan.toFixed(1)}万円</span>
               </div>
               <div className="flex justify-between">
                 <span>年返済額</span>
-                <span className="font-medium">{(results.monthlyPaymentMan * 12).toFixed(1)}万円</span>
+                <span className="font-medium text-gray-800">{(results.monthlyPaymentMan * 12).toFixed(1)}万円</span>
               </div>
             </div>
           </div>
@@ -638,10 +638,10 @@ export default function Home() {
         <main className="flex-1 min-w-0 flex flex-col gap-5">
           {/* Validation Errors */}
           {validationErrors.length > 0 && (
-            <div className="bg-red-900/40 border border-red-700 rounded-xl p-3 flex flex-col gap-1.5">
+            <div className="bg-red-50 border border-red-300 rounded-xl p-3 flex flex-col gap-1.5">
               {validationErrors.map((msg, i) => (
-                <p key={i} className="text-xs text-red-300 flex items-center gap-2">
-                  <AlertTriangle className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                <p key={i} className="text-xs text-red-700 flex items-center gap-2">
+                  <AlertTriangle className="w-3.5 h-3.5 text-red-500 shrink-0" />
                   {msg}
                 </p>
               ))}
@@ -653,28 +653,28 @@ export default function Home() {
             {summaryCards.map((card) => (
               <div
                 key={card.label}
-                className="bg-blue-950 rounded-xl border border-blue-800 p-4"
+                className="bg-white rounded-xl border border-gray-200 shadow-sm p-4"
               >
                 <div className={`inline-flex p-1.5 rounded-lg ${card.bg} mb-2`}>
                   <card.icon className={`w-4 h-4 ${card.color}`} />
                 </div>
-                <p className="text-xs text-blue-300">{card.label}</p>
+                <p className="text-xs text-gray-500">{card.label}</p>
                 <p className={`text-lg font-bold mt-0.5 ${card.color}`}>{card.value}</p>
               </div>
             ))}
           </div>
 
           {/* Charts */}
-          <div className="bg-blue-950 rounded-xl border border-blue-800 overflow-hidden">
-            <div className="flex border-b border-blue-800">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className="flex border-b border-gray-200">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
                   className={`px-5 py-3 text-sm font-medium transition-colors ${
                     activeTab === tab.key
-                      ? "border-b-2 border-blue-400 text-blue-300 bg-blue-900/50"
-                      : "text-blue-400 hover:text-blue-200 hover:bg-blue-900"
+                      ? "border-b-2 border-blue-600 text-blue-600 bg-blue-50"
+                      : "text-gray-500 hover:text-gray-800 hover:bg-gray-50"
                   }`}
                 >
                   {tab.label}
@@ -685,18 +685,18 @@ export default function Home() {
             <div className="p-4">
               {activeTab === "cashflow" && (
                 <>
-                  <p className="text-xs text-blue-400 mb-4">収入・費用・キャッシュフローの年次推移（万円）</p>
+                  <p className="text-xs text-gray-500 mb-4">収入・費用・キャッシュフローの年次推移（万円）</p>
                   <ResponsiveContainer width="100%" height={320}>
                     <BarChart data={results.data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1e3a5f" />
-                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#93c5fd" }} interval={4} />
-                      <YAxis tick={{ fontSize: 11, fill: "#93c5fd" }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#6b7280" }} interval={4} />
+                      <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
                       <Tooltip
                         formatter={(value, name) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, name]}
-                        contentStyle={{ fontSize: 12, backgroundColor: "#1e3a5f", border: "1px solid #2563eb", color: "#e0f2fe" }}
+                        contentStyle={{ fontSize: 12, backgroundColor: "#ffffff", border: "1px solid #e5e7eb", color: "#111827" }}
                       />
-                      <Legend wrapperStyle={{ fontSize: 12, color: "#93c5fd" }} />
-                      <ReferenceLine y={0} stroke="#4b6a8f" strokeDasharray="4 2" />
+                      <Legend wrapperStyle={{ fontSize: 12, color: "#6b7280" }} />
+                      <ReferenceLine y={0} stroke="#d1d5db" strokeDasharray="4 2" />
                       <Bar dataKey="grossRent" name="総収入" fill="#60a5fa" radius={[2, 2, 0, 0]} />
                       <Bar dataKey="totalExpenses" name="運営費" fill="#f97316" radius={[2, 2, 0, 0]} />
                       <Bar dataKey="loanRepayment" name="ローン返済" fill="#8b5cf6" radius={[2, 2, 0, 0]} />
@@ -715,36 +715,36 @@ export default function Home() {
 
               {activeTab === "cumulative" && (
                 <>
-                  <p className="text-xs text-blue-400 mb-4">累積キャッシュフロー推移（頭金含む）（万円）</p>
+                  <p className="text-xs text-gray-500 mb-4">累積キャッシュフロー推移（頭金含む）（万円）</p>
                   <ResponsiveContainer width="100%" height={320}>
                     <LineChart data={results.data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1e3a5f" />
-                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#93c5fd" }} interval={4} />
-                      <YAxis tick={{ fontSize: 11, fill: "#93c5fd" }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#6b7280" }} interval={4} />
+                      <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
                       <Tooltip
                         formatter={(value, name) => [typeof value === "number" ? `${value.toFixed(1)}万円` : value, name]}
-                        contentStyle={{ fontSize: 12, backgroundColor: "#1e3a5f", border: "1px solid #2563eb", color: "#e0f2fe" }}
+                        contentStyle={{ fontSize: 12, backgroundColor: "#ffffff", border: "1px solid #e5e7eb", color: "#111827" }}
                       />
-                      <Legend wrapperStyle={{ fontSize: 12, color: "#93c5fd" }} />
+                      <Legend wrapperStyle={{ fontSize: 12, color: "#6b7280" }} />
                       <ReferenceLine
                         y={0}
-                        stroke="#4b6a8f"
+                        stroke="#d1d5db"
                         strokeDasharray="4 2"
-                        label={{ value: "損益分岐", position: "insideTopLeft", fontSize: 11, fill: "#93c5fd" }}
+                        label={{ value: "損益分岐", position: "insideTopLeft", fontSize: 11, fill: "#6b7280" }}
                       />
                       {saleEnabled && (
                         <ReferenceLine
                           x={`${inputs.saleYear}年目`}
-                          stroke="#facc15"
+                          stroke="#d97706"
                           strokeDasharray="4 2"
-                          label={{ value: "売却", position: "insideTopRight", fontSize: 11, fill: "#facc15" }}
+                          label={{ value: "売却", position: "insideTopRight", fontSize: 11, fill: "#d97706" }}
                         />
                       )}
                       <Line
                         type="monotone"
                         dataKey="cumulativeCashflow"
                         name="累積CF"
-                        stroke="#60a5fa"
+                        stroke="#2563eb"
                         strokeWidth={2.5}
                         dot={false}
                         activeDot={{ r: 5 }}
@@ -753,22 +753,22 @@ export default function Home() {
                   </ResponsiveContainer>
                   {/* Sale scenario summary */}
                   {saleEnabled && (
-                    <div className="mt-4 bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-3 grid grid-cols-3 gap-3 text-xs">
+                    <div className="mt-4 bg-yellow-50 border border-yellow-300 rounded-lg p-3 grid grid-cols-3 gap-3 text-xs">
                       <div>
-                        <p className="text-yellow-400 mb-0.5">売却益（税引前）</p>
-                        <p className="text-white font-semibold">{formatManYen(results.saleNetProceeds)}</p>
+                        <p className="text-yellow-700 mb-0.5">売却益（税引前）</p>
+                        <p className="text-gray-900 font-semibold">{formatManYen(results.saleNetProceeds)}</p>
                         <p className="text-yellow-600 mt-0.5">売却価格 − 残債</p>
                       </div>
                       <div>
-                        <p className="text-yellow-400 mb-0.5">累積CF（売却時点）</p>
-                        <p className={`font-semibold ${results.saleRow.cumulativeCashflow >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        <p className="text-yellow-700 mb-0.5">累積CF（売却時点）</p>
+                        <p className={`font-semibold ${results.saleRow.cumulativeCashflow >= 0 ? "text-emerald-600" : "text-red-600"}`}>
                           {formatManYen(results.saleRow.cumulativeCashflow)}
                         </p>
                         <p className="text-yellow-600 mt-0.5">{inputs.saleYear}年間の運用CF合計</p>
                       </div>
                       <div>
-                        <p className="text-yellow-400 mb-0.5">売却時総収益</p>
-                        <p className={`font-semibold ${results.saleTotalReturn >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        <p className="text-yellow-700 mb-0.5">売却時総収益</p>
+                        <p className={`font-semibold ${results.saleTotalReturn >= 0 ? "text-emerald-600" : "text-red-600"}`}>
                           {formatManYen(results.saleTotalReturn)}
                         </p>
                         <p className="text-yellow-600 mt-0.5">累積CF + 売却益</p>
@@ -780,17 +780,17 @@ export default function Home() {
 
               {activeTab === "balance" && (
                 <>
-                  <p className="text-xs text-blue-400 mb-4">ローン残高推移（万円）</p>
+                  <p className="text-xs text-gray-500 mb-4">ローン残高推移（万円）</p>
                   <ResponsiveContainer width="100%" height={320}>
                     <LineChart data={results.data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1e3a5f" />
-                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#93c5fd" }} interval={4} />
-                      <YAxis tick={{ fontSize: 11, fill: "#93c5fd" }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis dataKey="year" tick={{ fontSize: 11, fill: "#6b7280" }} interval={4} />
+                      <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
                       <Tooltip
                         formatter={(value) => [typeof value === "number" ? `${value.toFixed(0)}万円` : value, "残債"]}
-                        contentStyle={{ fontSize: 12, backgroundColor: "#1e3a5f", border: "1px solid #2563eb", color: "#e0f2fe" }}
+                        contentStyle={{ fontSize: 12, backgroundColor: "#ffffff", border: "1px solid #e5e7eb", color: "#111827" }}
                       />
-                      <Legend wrapperStyle={{ fontSize: 12, color: "#93c5fd" }} />
+                      <Legend wrapperStyle={{ fontSize: 12, color: "#6b7280" }} />
                       <Line
                         type="monotone"
                         dataKey="remainingLoan"
@@ -808,15 +808,15 @@ export default function Home() {
           </div>
 
           {/* Table */}
-          <div className="bg-blue-950 rounded-xl border border-blue-800 overflow-hidden">
-            <div className="px-4 py-3 border-b border-blue-800">
-              <p className="text-sm font-semibold text-blue-100">年次詳細データ（万円）</p>
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className="px-4 py-3 border-b border-gray-200">
+              <p className="text-sm font-semibold text-gray-800">年次詳細データ（万円）</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="bg-blue-900 text-blue-300 text-right">
-                    <th className="px-3 py-2 text-left font-medium sticky left-0 bg-blue-900">年</th>
+                  <tr className="bg-gray-50 text-gray-500 text-right">
+                    <th className="px-3 py-2 text-left font-medium sticky left-0 bg-gray-50">年</th>
                     <th className="px-3 py-2 font-medium">総収入</th>
                     <th className="px-3 py-2 font-medium">運営費</th>
                     <th className="px-3 py-2 font-medium">NOI</th>
@@ -832,34 +832,34 @@ export default function Home() {
                   {results.data.map((row, i) => (
                     <tr
                       key={i}
-                      className={`border-t border-blue-800 text-right ${
-                        i % 2 === 0 ? "bg-blue-950" : "bg-blue-900/40"
+                      className={`border-t border-gray-100 text-right ${
+                        i % 2 === 0 ? "bg-white" : "bg-gray-50"
                       }`}
                     >
-                      <td className="px-3 py-2 text-left text-blue-200 sticky left-0 bg-inherit">{row.year}</td>
-                      <td className="px-3 py-2 text-blue-100">{row.grossRent.toFixed(1)}</td>
-                      <td className="px-3 py-2 text-orange-400">{row.totalExpenses.toFixed(1)}</td>
-                      <td className="px-3 py-2 text-blue-300">{row.noiBeforeLoan.toFixed(1)}</td>
-                      <td className="px-3 py-2 text-violet-400">{row.loanRepayment.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-left text-gray-700 sticky left-0 bg-inherit">{row.year}</td>
+                      <td className="px-3 py-2 text-gray-800">{row.grossRent.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-orange-600">{row.totalExpenses.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-gray-600">{row.noiBeforeLoan.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-violet-600">{row.loanRepayment.toFixed(1)}</td>
                       <td
                         className={`px-3 py-2 font-semibold ${
-                          row.annualCashflow >= 0 ? "text-emerald-400" : "text-red-400"
+                          row.annualCashflow >= 0 ? "text-emerald-600" : "text-red-600"
                         }`}
                       >
                         {row.annualCashflow.toFixed(1)}
                       </td>
                       <td
                         className={`px-3 py-2 font-semibold ${
-                          row.cumulativeCashflow >= 0 ? "text-emerald-400" : "text-red-400"
+                          row.cumulativeCashflow >= 0 ? "text-emerald-600" : "text-red-600"
                         }`}
                       >
                         {row.cumulativeCashflow.toFixed(1)}
                       </td>
-                      <td className="px-3 py-2 text-blue-400">{row.remainingLoan.toFixed(0)}</td>
-                      <td className="px-3 py-2 text-blue-400">{row.yieldRate.toFixed(2)}%</td>
+                      <td className="px-3 py-2 text-gray-500">{row.remainingLoan.toFixed(0)}</td>
+                      <td className="px-3 py-2 text-gray-500">{row.yieldRate.toFixed(2)}%</td>
                       <td
                         className={`px-3 py-2 ${
-                          row.cashOnCash >= 0 ? "text-emerald-400" : "text-red-400"
+                          row.cashOnCash >= 0 ? "text-emerald-600" : "text-red-600"
                         }`}
                       >
                         {row.cashOnCash.toFixed(2)}%
@@ -874,20 +874,20 @@ export default function Home() {
       </div>
 
       {/* Disclaimer */}
-      <footer className="border-t border-blue-900 bg-slate-950 px-6 py-4 mt-4">
+      <footer className="border-t border-gray-200 bg-gray-50 px-6 py-4 mt-4">
         <div className="max-w-7xl mx-auto space-y-2">
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="text-xs text-gray-500 leading-relaxed">
             【免責事項】本シミュレーターは不動産投資の参考情報を提供することを目的としており、投資助言・勧誘を行うものではありません。シミュレーション結果は入力値に基づく試算であり、将来の収益・損失を保証するものではありません。税制・金利・市況の変動により、実際の結果は大きく異なる場合があります。実際の投資判断は、税理士・ファイナンシャルプランナーなどの専門家にご相談のうえ、ご自身の責任においてお行いください。
           </p>
           <div className="flex flex-wrap items-center gap-4">
-            <p className="text-xs text-slate-600">運営：川口哲也税理士事務所</p>
-            <Link href="/about" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+            <p className="text-xs text-gray-500">運営：川口哲也税理士事務所</p>
+            <Link href="/about" className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 transition-colors">
               運営者情報
             </Link>
-            <Link href="/contact" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+            <Link href="/contact" className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 transition-colors">
               お問い合わせ
             </Link>
-            <Link href="/privacy-policy" className="text-xs text-slate-500 hover:text-slate-300 underline underline-offset-2 transition-colors">
+            <Link href="/privacy-policy" className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2 transition-colors">
               プライバシーポリシー
             </Link>
           </div>
