@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "housing-loan-fixed-vs-variable-rate",
     title: "不動産住宅ローン金利　固定か変動か",
     date: "2026-05-29",
+    image: "/images/articles/housing-loan-fixed-vs-variable-rate.jpg",
     keywords: ["住宅ローン 不動産 金利"],
     excerpt:
       "住宅ローンの金利タイプ選択は、総返済額に数百万円単位の差を生む重要な決断です。「今は変動が得」という感覚だけで選ぶと、金利上昇局面で思わぬコスト増に直面します。固定・変動それぞれの特徴と選択のポイントを解説します。",
