@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "real-estate-inheritance-tax-valuation",
     title: "不動産（土地・建物等）の相続税評価額について",
     date: "2026-05-30",
+    image: "/images/articles/real-estate-inheritance-tax-valuation.jpg",
     keywords: ["相続 不動産"],
     excerpt:
       "相続が発生した際の不動産評価は、適用する特例や評価方法の選択次第で相続税額が大きく変わります。令和8年税制改正で一部特例が封じられる部分もあります。土地・建物の評価の基本から重要な特例まで、税理士が実務ベースで解説します。",
