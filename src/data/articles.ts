@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "real-estate-co-ownership-risks",
     title: "不動産の共有名義の注意点とは",
     date: "2026-05-31",
+    image: "/images/articles/real-estate-co-ownership-risks.jpg",
     keywords: ["不動産 共有 売却"],
     excerpt:
       "不動産を夫婦や親族と共有名義で取得するケースは珍しくありません。しかし共有名義には、売却・リフォーム・相続など様々な場面で意思決定が困難になるリスクが潜んでいます。共有名義特有の問題点と実務上の注意点を解説します。",
