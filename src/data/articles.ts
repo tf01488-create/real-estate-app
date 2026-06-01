@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "real-estate-capital-gains-5-points",
     title: "譲渡所得の計算　これだけは押さえておくべき5つのポイント",
     date: "2026-06-01",
+    image: "/images/articles/real-estate-capital-gains-5-points.jpg",
     keywords: ["譲渡 譲渡所得 不動産"],
     excerpt:
       "不動産を売却すると譲渡所得の確定申告が必要になります。取得費に何が含まれるか、書類がない場合の対応、譲渡費用の範囲など、実務では判断に迷う場面が多くあります。知っておくと役立つ5つのポイントを税理士が解説します。",
