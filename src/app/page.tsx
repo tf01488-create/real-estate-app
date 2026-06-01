@@ -873,6 +873,31 @@ export default function Home() {
         </main>
       </div>
 
+      {/* LINE CTA */}
+      <div className="max-w-7xl mx-auto px-4 mb-6">
+        <a
+          href="https://lin.ee/QY17l0C"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-green-500 hover:bg-green-600 transition-colors rounded-xl px-6 py-5 shadow-sm"
+        >
+          <div className="flex items-center gap-4">
+            <div className="bg-white rounded-xl p-2.5 shrink-0">
+              <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#06C755">
+                <path d="M12 2C6.48 2 2 6.03 2 11c0 3.19 1.73 6.01 4.38 7.77-.19.71-.69 2.58-.79 2.98-.12.5.18.49.38.36.16-.11 2.06-1.39 2.9-1.96.69.1 1.4.15 2.13.15 5.52 0 10-4.03 10-9S17.52 2 12 2zm-4 12.5H6.5V9H8v5.5zm1.5 0V9H11v3.75L13.25 9H15v5.5h-1.5V10.75L11.25 14.5H9.5zm8 0H16v-2.25L13.75 14.5H12v-5.5h1.5v3.75L15.75 9H18v5.5z"/>
+              </svg>
+            </div>
+            <div>
+              <p className="text-white font-bold text-base leading-snug">シミュレーション結果について税理士に相談しませんか？</p>
+              <p className="text-green-100 text-sm mt-0.5">川口哲也税理士事務所の公式LINEから無料でご相談いただけます</p>
+            </div>
+          </div>
+          <div className="shrink-0 bg-white text-green-600 font-bold text-sm px-5 py-2.5 rounded-lg whitespace-nowrap">
+            LINEで無料相談 →
+          </div>
+        </a>
+      </div>
+
       {/* Disclaimer */}
       <footer className="border-t border-gray-200 bg-gray-50 px-6 py-4 mt-4">
         <div className="max-w-7xl mx-auto space-y-2">
