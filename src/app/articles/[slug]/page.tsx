@@ -127,17 +127,33 @@ export default async function ArticlePage({ params }: Props) {
             </p>
 
             <div className="space-y-5">
-              {article.content.map((paragraph, i) => (
-                <p key={i} className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                  {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
-                    j % 2 === 1 ? (
-                      <strong key={j} className="font-bold text-blue-700">{part}</strong>
-                    ) : (
-                      part
-                    )
-                  )}
-                </p>
-              ))}
+              {article.content.map((paragraph, i) => {
+                if (paragraph.startsWith("## ")) {
+                  return (
+                    <h2 key={i} className="text-base sm:text-lg font-bold text-gray-900 mt-8 mb-1 pt-6 border-t border-gray-200 first:pt-0 first:border-t-0">
+                      {paragraph.slice(3)}
+                    </h2>
+                  );
+                }
+                if (paragraph.startsWith("### ")) {
+                  return (
+                    <h3 key={i} className="text-sm sm:text-base font-bold text-gray-800 mt-5 mb-1">
+                      {paragraph.slice(4)}
+                    </h3>
+                  );
+                }
+                return (
+                  <p key={i} className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+                      j % 2 === 1 ? (
+                        <strong key={j} className="font-bold text-blue-700">{part}</strong>
+                      ) : (
+                        part
+                      )
+                    )}
+                  </p>
+                );
+              })}
             </div>
           </div>
         </article>
