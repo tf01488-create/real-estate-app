@@ -1,14 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { articles } from "@/data/articles";
-import { Building2, BookOpen, ChevronRight } from "lucide-react";
+import { Building2 } from "lucide-react";
 import type { Metadata } from "next";
 import { ArticlesClient } from "./articles-client";
-
-export const metadata: Metadata = {
-  title: "不動産投資コラム | 不動産投資　簡易シミュレーション",
-  description: "不動産投資に役立つ記事を日々更新しています。",
-};
 
 export const metadata: Metadata = {
   title: "不動産投資コラム | 不動産投資　簡易シミュレーション",
