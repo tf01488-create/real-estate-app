@@ -1,7 +1,10 @@
+export type ArticleCategory = "融資・ローン" | "税金・節税" | "物件評価・購入" | "売却・出口戦略" | "運用・管理";
+
 export interface Article {
   slug: string;
   title: string;
   date: string;
+  category: ArticleCategory;
   excerpt: string;
   content: string[];
   keywords?: string[];
@@ -13,6 +16,7 @@ export const articles: Article[] = [
     slug: "used-property-depreciation-method",
     title: "不動産　中古の減価償却の方法",
     date: "2026-06-02",
+    category: "税金・節税",
     image: "/images/articles/used-property-depreciation-method.jpg",
     keywords: ["不動産 減価償却"],
     excerpt:
@@ -44,6 +48,7 @@ export const articles: Article[] = [
     slug: "real-estate-capital-gains-5-points",
     title: "譲渡所得の計算　これだけは押さえておくべき5つのポイント",
     date: "2026-06-01",
+    category: "税金・節税",
     image: "/images/articles/real-estate-capital-gains-5-points.jpg",
     keywords: ["譲渡 譲渡所得 不動産"],
     excerpt:
@@ -62,6 +67,7 @@ export const articles: Article[] = [
     slug: "real-estate-co-ownership-risks",
     title: "不動産の共有名義の注意点とは",
     date: "2026-05-31",
+    category: "運用・管理",
     image: "/images/articles/real-estate-co-ownership-risks.jpg",
     keywords: ["不動産 共有 売却"],
     excerpt:
@@ -81,6 +87,7 @@ export const articles: Article[] = [
     slug: "real-estate-inheritance-tax-valuation",
     title: "不動産（土地・建物等）の相続税評価額について",
     date: "2026-05-30",
+    category: "税金・節税",
     image: "/images/articles/real-estate-inheritance-tax-valuation.jpg",
     keywords: ["相続 不動産"],
     excerpt:
@@ -100,6 +107,7 @@ export const articles: Article[] = [
     slug: "housing-loan-fixed-vs-variable-rate",
     title: "不動産住宅ローン金利　固定か変動か",
     date: "2026-05-29",
+    category: "融資・ローン",
     image: "/images/articles/housing-loan-fixed-vs-variable-rate.jpg",
     keywords: ["住宅ローン 不動産 金利"],
     excerpt:
@@ -119,6 +127,7 @@ export const articles: Article[] = [
     slug: "real-estate-investment-success-vs-failure",
     title: "不動産投資で儲かる人・儲からない人──成功と失敗を分けるポイントとは",
     date: "2026-05-28",
+    category: "運用・管理",
     image: "/images/articles/real-estate-investment-success-vs-failure.jpg",
     keywords: ["不動産投資 儲かる"],
     excerpt:
@@ -138,6 +147,7 @@ export const articles: Article[] = [
     slug: "real-estate-income-calculation-points",
     title: "不動産所得の計算のポイント",
     date: "2026-05-27",
+    category: "税金・節税",
     image: "/images/articles/real-estate-income-calculation-points.jpg",
     keywords: ["不動産所得 税理士"],
     excerpt:
@@ -157,6 +167,7 @@ export const articles: Article[] = [
     slug: "what-is-rosenka-land-valuation",
     title: "路線価ってなに？おさらいしておきたいポイント",
     date: "2026-05-26",
+    category: "物件評価・購入",
     keywords: ["路線価 宅地"],
     image: "/images/articles/what-is-rosenka-land-valuation.jpg",
     excerpt:
@@ -176,6 +187,7 @@ export const articles: Article[] = [
     image: "/images/articles/real-estate-bank-evaluation-financial-statement.jpg",
     title: "不動産投資　銀行評価に通る決算書とは？",
     date: "2026-05-25",
+    category: "融資・ローン",
     keywords: ["不動産投資 銀行評価"],
     excerpt:
       "不動産投資で融資を受けるには、銀行が「貸せる」と判断できる決算書・財務内容が必要です。銀行がどこを見ているのか、融資に通りやすい決算書のポイントを税理士が実務ベースで解説します。",
@@ -193,6 +205,7 @@ export const articles: Article[] = [
     image: "/images/articles/real-estate-fixed-property-tax.jpg",
     title: "不動産の固定資産税はどうやって決まっている？",
     date: "2026-05-24",
+    category: "税金・節税",
     keywords: ["不動産 固定資産税"],
     excerpt:
       "土地や建物を所有していると毎年必ず課税される固定資産税。その金額がどのような基準で決まっているのか、また節税につながる特例や実務上の注意点について税理士が解説します。",
@@ -212,6 +225,7 @@ export const articles: Article[] = [
     image: "/images/articles/repair-vs-capital-expenditure-rental.jpg",
     title: "不動産賃貸業における修繕費と資本的支出の判断基準について解説",
     date: "2026-05-23",
+    category: "税金・節税",
     keywords: ["不動産 修繕費"],
     excerpt:
       "不動産賃貸業を行ううえで最も頭を悩ませるポイントの一つが、工事費用を「修繕費」として経費計上するのか、「資本的支出」として固定資産に計上するのかの判断です。この区分を誤ると税務調査での指摘につながります。判断基準と実務上の注意点を税理士が解説します。",
@@ -231,6 +245,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/real-estate-rental-consumption-tax.jpg",
     title: "不動産賃貸業における消費税の取り扱い。課税？非課税？",
     date: "2026-05-22",
+    category: "税金・節税",
     keywords: ["不動産 賃貸 消費税"],
     excerpt:
       "不動産賃貸業では「住宅の貸付は非課税、事業用は課税」が原則ですが、実務では判断に迷うケースが数多く存在します。駐車場・混在物件・インボイス制度との関係など、実務ベースで気を付けるべきポイントを税理士が解説します。",
@@ -250,6 +265,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/real-estate-investment-basics.jpg",
     title: "不動産投資の基本：初心者が知っておくべき5つのポイント",
     date: "2026-05-13",
+    category: "物件評価・購入",
     excerpt:
       "不動産投資を始める前に押さえておきたい基礎知識をまとめました。利回りの考え方から資金計画まで、初心者向けにわかりやすく解説します。",
     content: [
@@ -266,6 +282,7 @@ export const articles: Article[] = [
     image: "/images/articles/how-to-read-cashflow.png",
     title: "キャッシュフロー計算の読み方：NOI・CF・累積CFの違いとは",
     date: "2026-05-13",
+    category: "物件評価・購入",
     excerpt:
       "不動産投資でよく出てくるNOI・CF・累積CFの違いを整理します。シミュレーターの数値を正しく読み取るための基礎知識です。",
     content: [
@@ -281,6 +298,7 @@ export const articles: Article[] = [
     image: "/images/articles/tax-saving-real-estate-investment.png",
     title: "不動産投資で節税できる仕組みを徹底解説：減価償却・損益通算とは",
     date: "2026-05-14",
+    category: "税金・節税",
     excerpt:
       "給与所得が高い会社員ほど恩恵を受けやすいと言われる不動産投資の節税効果。減価償却費・損益通算・確定申告の仕組みをわかりやすく解説します。",
     content: [
@@ -297,6 +315,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/tokyo-vs-local-real-estate.jpg",
     title: "都市部 vs 地方：不動産投資はどちらが有利か？エリア選びの考え方",
     date: "2026-05-14",
+    category: "物件評価・購入",
     excerpt:
       "東京・大阪などの都市部と地方都市、どちらで不動産投資をすべきか迷う方は多いです。利回り・流動性・空室リスクの観点から、エリア選びのポイントを解説します。",
     content: [
@@ -312,6 +331,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/myhome-sale-inheritance-tax-exemptions.jpg",
     title: "マイホームの売却・相続等で使える特例は？お得な税制とは",
     date: "2026-05-21",
+    category: "税金・節税",
     keywords: ["マイホーム 売却 特例"],
     excerpt:
       "マイホームの売却や相続が発生した際には、一般の不動産と比べて大きく優遇された税制上の特例が複数用意されています。ただし、それぞれに細かい適用要件があり、要件を満たさなければ控除を受けることができません。主要な特例の内容と注意点を税理士の視点から解説します。",
@@ -331,6 +351,7 @@ export const articles: Article[] = [
     image: "/images/articles/housing-loan-limit-income-4m.png",
     title: "年収400万円の住宅ローン借りられる限界額はいくら？",
     date: "2026-05-20",
+    category: "融資・ローン",
     keywords: ["不動産 住宅ローン"],
     excerpt:
       "住宅の購入は多くの人にとって人生最大の買い物です。住宅ローンを「借りられる額」と「無理なく返せる額」は似て非なるものです。税理士としてキャッシュフローの観点から両者の違いを解説し、住宅ローン控除による節税メリットも合わせてご紹介します。",
@@ -349,6 +370,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/when-to-sell-real-estate.jpg",
     title: "不動産売却時期の見極め方・判断基準とは",
     date: "2026-05-19",
+    category: "売却・出口戦略",
     keywords: ["不動産 売却"],
     excerpt:
       "不動産投資を始めるときに必ずセットで考えるべきなのが「出口戦略」です。いつ、どのような判断基準で売却するかを事前に描いておくことが、投資全体の収益を左右します。売却時期の見極め方と、判断の際に注意すべきポイントを解説します。",
@@ -367,6 +389,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/rental-property-valuation-reform-2027.jpg",
     title: "貸付用不動産の評価方法見直し、改正内容に注目｜5年縛りルール",
     date: "2026-05-18",
+    category: "融資・ローン",
     keywords: ["不動産 相続税対策", "貸付用不動産 評価", "不動産小口化商品 相続"],
     excerpt:
       "令和8年税制改正大綱で発表された貸付用不動産の評価見直しは、令和9年1月1日以降の相続・贈与から適用される予定です。これまでの相続税対策として広く使われてきた不動産活用の考え方が大きく変わります。改正内容と今後の対応策を解説します。",
@@ -385,6 +408,7 @@ export const articles: Article[] = [
     image: "/images/articles/real-estate-tax-saving-effect.png",
     title: "不動産節税、その節税効果はどれくらい？",
     date: "2026-05-17",
+    category: "税金・節税",
     keywords: ["不動産節税"],
     excerpt:
       "税理士としての実務経験をもとに、サラリーマンが副業で不動産投資をした場合の節税効果を解説します。減価償却による赤字計上の仕組みから実際の効果・期間・有利なパターン・注意点まで、正確な知識を身につけましょう。",
@@ -403,6 +427,7 @@ export const articles: Article[] = [
     image: "/images/articles/rent-vs-buy.png",
     title: "不動産は、賃貸か持ち家か",
     date: "2026-05-17",
+    category: "売却・出口戦略",
     keywords: ["賃貸", "持ち家", "どちらがお得"],
     excerpt:
       "「一生賃貸でいいのか」「家を買った方が得なのか」は、多くの人が一度は悩む問いです。コスト・ライフスタイル・資産形成の観点から、両者を冷静に比較します。",
@@ -421,6 +446,7 @@ export const articles: Article[] = [
     image: "/images/articles/public/images/articles/one-room-investment-risks.jpg",
     title: "ワンルーム投資のリスクとは？これだけは押さえておきたいこと",
     date: "2026-05-16",
+    category: "物件評価・購入",
     keywords: ["ワンルーム投資", "リスク"],
     excerpt:
       "「手軽に始められる」と言われるワンルームマンション投資ですが、陥りやすいリスクが数多く潜んでいます。購入前に必ず知っておきたいポイントを整理しました。",
@@ -441,6 +467,7 @@ export const articles: Article[] = [
     image: "/images/articles/common-mistakes-real-estate-beginners.png",
     title: "不動産投資で失敗する人の共通パターン7選と回避策",
     date: "2026-05-14",
+    category: "物件評価・購入",
     excerpt:
       "不動産投資で後悔している人の多くは、共通した落とし穴にはまっています。初心者がやりがちな失敗パターンと、その具体的な回避策をまとめました。",
     content: [

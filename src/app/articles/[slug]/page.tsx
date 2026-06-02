@@ -119,7 +119,12 @@ export default async function ArticlePage({ params }: Props) {
             />
           )}
           <div className="p-6 sm:p-8">
-            <p className="text-xs text-gray-400 mb-3">{article.date}</p>
+            <div className="flex items-center gap-2 mb-3">
+              <p className="text-xs text-gray-400">{article.date}</p>
+              <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+                {article.category}
+              </span>
+            </div>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-snug mb-6">
               {article.title}
             </h2>
