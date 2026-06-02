@@ -321,6 +321,15 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "url": BASE_URL,
+        "name": "不動産投資　簡易シミュレーション",
+        "publisher": {
+          "@type": "Organization",
+          "name": "川口哲也税理士事務所",
+        },
+      },
+      {
         "@type": "WebApplication",
         "name": "不動産投資　簡易シミュレーション",
         "description": "物件価格・ローン・賃料などを入力して35年間の収支をシミュレーション。売却シナリオも対応。",
