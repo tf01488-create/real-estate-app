@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { articles, getArticleBySlug } from "@/data/articles";
+import { articles, getArticleBySlug, getRelatedArticles } from "@/data/articles";
 import { Building2, ChevronLeft } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -28,6 +28,7 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) notFound();
+  const related = getRelatedArticles(slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -170,6 +171,39 @@ export default async function ArticlePage({ params }: Props) {
             シミュレーターを使う →
           </Link>
         </div>
+
+        {related.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-sm font-bold text-gray-700 mb-3">関連記事</h3>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {related.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/articles/${r.slug}`}
+                  className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group"
+                >
+                  {r.image && (
+                    <div className="relative w-full h-24">
+                      <Image
+                        src={r.image}
+                        alt={r.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                      />
+                    </div>
+                  )}
+                  <div className="p-3">
+                    <p className="text-xs text-gray-400 mb-1">{r.date}</p>
+                    <p className="text-xs font-semibold text-gray-800 leading-snug group-hover:text-blue-600 transition-colors line-clamp-3">
+                      {r.title}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         <footer className="mt-8 flex flex-wrap gap-4 text-xs text-gray-500">
           <Link href="/" className="hover:text-gray-800 transition-colors">トップ</Link>

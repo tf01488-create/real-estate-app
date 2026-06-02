@@ -459,3 +459,25 @@ export const articles: Article[] = [
 export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
 }
+
+export function getRelatedArticles(slug: string, count = 3): Article[] {
+  const current = getArticleBySlug(slug);
+  const others = articles.filter((a) => a.slug !== slug);
+
+  if (current?.keywords && current.keywords.length > 0) {
+    const currentWords = current.keywords.join(" ").toLowerCase();
+    const scored = others.map((a) => {
+      const words = ((a.keywords ?? []).join(" ") + " " + a.title).toLowerCase();
+      const score = current.keywords!.filter((kw) =>
+        words.includes(kw.toLowerCase())
+      ).length;
+      return { article: a, score };
+    });
+    scored.sort((a, b) => b.score - a.score || b.article.date.localeCompare(a.article.date));
+    return scored.slice(0, count).map((s) => s.article);
+  }
+
+  return [...others]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, count);
+}
