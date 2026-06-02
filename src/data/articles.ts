@@ -13,6 +13,7 @@ export const articles: Article[] = [
     slug: "used-property-depreciation-method",
     title: "不動産　中古の減価償却の方法",
     date: "2026-06-02",
+    image: "/images/articles/used-property-depreciation-method.jpg",
     keywords: ["不動産 減価償却"],
     excerpt:
       "不動産を購入した場合、建物部分は減価償却によって将来にわたって費用化します。特に中古物件は耐用年数の計算が新築と異なり、節税効果が大きい反面、ルールが複雑です。中古不動産の減価償却の考え方と計算方法を税理士が解説します。",
