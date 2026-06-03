@@ -133,32 +133,35 @@ export default async function ArticlePage({ params }: Props) {
             </p>
 
             <div className="space-y-5">
-              {article.content.map((paragraph, i) => {
-                if (paragraph.startsWith("## ")) {
-                  return (
-                    <h2 key={i} className="text-base sm:text-lg font-bold text-gray-900 mt-8 mb-1 pt-6 border-t border-gray-200 first:pt-0 first:border-t-0">
-                      {paragraph.slice(3)}
-                    </h2>
-                  );
-                }
-                if (paragraph.startsWith("### ")) {
-                  return (
-                    <h3 key={i} className="text-sm sm:text-base font-bold text-gray-800 mt-5 mb-1">
-                      {paragraph.slice(4)}
-                    </h3>
-                  );
-                }
-                return (
-                  <p key={i} className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
-                    {paragraph.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+              {article.content.flatMap((paragraph, i) => {
+                const renderBold = (text: string, key: string) => (
+                  <p key={key} className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {text.split(/\*\*(.*?)\*\*/g).map((part, j) =>
                       j % 2 === 1 ? (
                         <strong key={j} className="font-bold text-blue-700">{part}</strong>
-                      ) : (
-                        part
-                      )
+                      ) : (part)
                     )}
                   </p>
                 );
+                if (paragraph.startsWith("## ")) {
+                  const nl = paragraph.indexOf("\n");
+                  const heading = nl >= 0 ? paragraph.slice(3, nl) : paragraph.slice(3);
+                  const body = nl >= 0 ? paragraph.slice(nl + 1).trim() : "";
+                  return [
+                    <h2 key={`${i}-h`} className="text-base sm:text-lg font-bold text-gray-900 mt-8 mb-1 pt-6 border-t border-gray-200">{heading}</h2>,
+                    ...(body ? [renderBold(body, `${i}-p`)] : []),
+                  ];
+                }
+                if (paragraph.startsWith("### ")) {
+                  const nl = paragraph.indexOf("\n");
+                  const heading = nl >= 0 ? paragraph.slice(4, nl) : paragraph.slice(4);
+                  const body = nl >= 0 ? paragraph.slice(nl + 1).trim() : "";
+                  return [
+                    <h3 key={`${i}-h`} className="text-sm sm:text-base font-bold text-gray-800 mt-5 mb-1">{heading}</h3>,
+                    ...(body ? [renderBold(body, `${i}-p`)] : []),
+                  ];
+                }
+                return [renderBold(paragraph, `${i}`)];
               })}
             </div>
           </div>
