@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-market-2026-land-price",
     title: "2026年の不動産相場は？いつまで続く地価上昇",
     date: "2026-06-03",
+    image: "/images/articles/real-estate-market-2026-land-price.jpg",
     category: "物件評価・購入",
     keywords: ["不動産 相場 地価"],
     excerpt:
