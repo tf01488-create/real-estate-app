@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import Link from "next/link";
 import { Building2, RotateCcw, Info, ChevronDown } from "lucide-react";
 
@@ -87,6 +87,11 @@ interface InputFieldProps {
 }
 
 function NumField({ label, hint, value, onChange, unit, min = 0, max, step = 1 }: InputFieldProps) {
+  const [raw, setRaw] = useState<string | null>(null);
+  const focused = useRef(false);
+
+  const displayed = focused.current && raw !== null ? raw : String(value);
+
   return (
     <div>
       <div className="flex items-center gap-1 mb-1">
@@ -102,12 +107,25 @@ function NumField({ label, hint, value, onChange, unit, min = 0, max, step = 1 }
       </div>
       <div className="flex items-center gap-2">
         <input
-          type="number"
-          value={value}
-          min={min}
-          max={max}
-          step={step}
-          onChange={(e) => onChange(Number(e.target.value))}
+          type="text"
+          inputMode="decimal"
+          value={displayed}
+          onFocus={() => {
+            focused.current = true;
+            setRaw(value === 0 ? "" : String(value));
+          }}
+          onChange={(e) => {
+            const s = e.target.value;
+            setRaw(s);
+            const n = parseFloat(s);
+            if (!isNaN(n)) onChange(n);
+          }}
+          onBlur={() => {
+            focused.current = false;
+            const n = parseFloat(raw ?? "");
+            onChange(isNaN(n) ? 0 : Math.max(min, max !== undefined ? Math.min(max, n) : n));
+            setRaw(null);
+          }}
           className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <span className="text-xs text-gray-500 whitespace-nowrap">{unit}</span>
