@@ -373,6 +373,12 @@ export default function Home() {
           >
             コラム記事
           </Link>
+          <Link
+            href="/income-simulator"
+            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+          >
+            所得シミュレーター
+          </Link>
           <a
             href="https://lin.ee/QY17l0C"
             target="_blank"
