@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "real-estate-tax-all-stages",
-    title: "不動産の購入・所有・売却・相続、どんな税金がいつかかる？",
+    title: "不動産にかかる税金一覧｜購入・保有・売却・相続の各段階で発生する税を税理士が解説",
     date: "2026-06-03",
     image: "/images/articles/real-estate-tax-all-stages.jpg.jpg",
     category: "税金・節税",
@@ -53,7 +53,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-market-2026-land-price",
-    title: "2026年の不動産相場は？いつまで続く地価上昇",
+    title: "2026年の不動産価格はどうなる？地価上昇の背景と今後の見通しを税理士が解説",
     date: "2026-06-03",
     image: "/images/articles/real-estate-market-2026-land-price.jpg",
     category: "物件評価・購入",
@@ -87,7 +87,7 @@ export const articles: Article[] = [
   },
   {
     slug: "used-property-depreciation-method",
-    title: "不動産　中古の減価償却の方法",
+    title: "中古不動産の減価償却費の計算方法｜築年数・構造別の耐用年数を税理士が解説",
     date: "2026-06-02",
     category: "税金・節税",
     image: "/images/articles/used-property-depreciation-method.jpg",
@@ -119,7 +119,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-capital-gains-5-points",
-    title: "譲渡所得の計算　これだけは押さえておくべき5つのポイント",
+    title: "不動産売却の譲渡所得税の計算方法｜取得費・譲渡費用・特別控除を税理士が解説",
     date: "2026-06-01",
     category: "税金・節税",
     image: "/images/articles/real-estate-capital-gains-5-points.jpg",
@@ -138,7 +138,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-co-ownership-risks",
-    title: "不動産の共有名義の注意点とは",
+    title: "不動産の共有名義で起きるトラブルとリスク｜売却・相続時の注意点を税理士が解説",
     date: "2026-05-31",
     category: "運用・管理",
     image: "/images/articles/real-estate-co-ownership-risks.jpg",
@@ -158,7 +158,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-inheritance-tax-valuation",
-    title: "不動産（土地・建物等）の相続税評価額について",
+    title: "不動産の相続税評価額の計算方法｜土地（路線価方式）・建物の評価を税理士が解説",
     date: "2026-05-30",
     category: "税金・節税",
     image: "/images/articles/real-estate-inheritance-tax-valuation.jpg",
@@ -178,7 +178,7 @@ export const articles: Article[] = [
   },
   {
     slug: "housing-loan-fixed-vs-variable-rate",
-    title: "不動産住宅ローン金利　固定か変動か",
+    title: "住宅ローンは固定金利と変動金利どちらがお得？2026年版・税理士が試算して比較",
     date: "2026-05-29",
     category: "融資・ローン",
     image: "/images/articles/housing-loan-fixed-vs-variable-rate.jpg",
@@ -198,7 +198,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-investment-success-vs-failure",
-    title: "不動産投資で儲かる人・儲からない人──成功と失敗を分けるポイントとは",
+    title: "不動産投資で失敗する人の特徴と成功する人の違い｜税理士が見た現実",
     date: "2026-05-28",
     category: "運用・管理",
     image: "/images/articles/real-estate-investment-success-vs-failure.jpg",
@@ -218,7 +218,7 @@ export const articles: Article[] = [
   },
   {
     slug: "real-estate-income-calculation-points",
-    title: "不動産所得の計算のポイント",
+    title: "不動産所得の確定申告｜計算方法と経費になるもの・ならないものを税理士が解説",
     date: "2026-05-27",
     category: "税金・節税",
     image: "/images/articles/real-estate-income-calculation-points.jpg",
@@ -238,7 +238,7 @@ export const articles: Article[] = [
   },
   {
     slug: "what-is-rosenka-land-valuation",
-    title: "路線価ってなに？おさらいしておきたいポイント",
+    title: "路線価とは？調べ方と相続税・贈与税への影響をわかりやすく解説【税理士監修】",
     date: "2026-05-26",
     category: "物件評価・購入",
     keywords: ["路線価 宅地"],
