@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-tax-all-stages",
     title: "不動産の購入・所有・売却・相続、どんな税金がいつかかる？",
     date: "2026-06-03",
+    image: "/images/articles/real-estate-tax-all-stages.jpg.jpg",
     category: "税金・節税",
     keywords: ["相続 不動産"],
     excerpt:
