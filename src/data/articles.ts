@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "inheritance-registration-mandatory-2024",
     title: "相続登記の義務化がスタート！知らないと罰則も？期限・手続き・注意点を解説",
     date: "2026-06-06",
+    image: "/images/articles/inheritance-registration-mandatory-2024.jpg",
     category: "税金・節税",
     keywords: ["相続登記 義務化"],
     excerpt:
