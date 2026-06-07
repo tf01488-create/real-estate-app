@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "vacant-house-tax-trends-2026",
     title: "空き家問題と税金の最新動向｜特例措置から「空き家税」導入の動きまで税理士が解説",
     date: "2026-06-07",
+    image: "/images/articles/vacant-house-tax-trends-2026.jpg",
     category: "税金・節税",
     keywords: ["空き家 税金"],
     excerpt:
