@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "vacant-house-renovation-subsidy-tax",
     title: "空き家活用で使える補助金・助成金とは？申請前に税理士に相談すべき理由",
     date: "2026-06-08",
+    image: "/images/articles/vacant-house-renovation-subsidy-tax.jpg",
     category: "税金・節税",
     keywords: ["空き家 補助金"],
     excerpt:
