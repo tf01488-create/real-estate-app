@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-purchase-documents-to-keep",
     title: "不動産購入時に残しておくべき書類とは？将来の売却・税務調査に備えて税理士が解説",
     date: "2026-06-09",
+    image: "/images/articles/real-estate-purchase-documents-to-keep.jpg",
     category: "税金・節税",
     keywords: ["不動産 売却 書類"],
     excerpt:
