@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "residential-rental-consumption-tax-restriction",
     title: "居住用賃貸建物の消費税還付が制限に！仕入税額控除の規制と背景を税理士が解説",
     date: "2026-06-09",
+    image: "/images/articles/residential-rental-consumption-tax-restriction.jpg",
     category: "税金・節税",
     keywords: ["居住用賃貸建物 消費税"],
     excerpt:
