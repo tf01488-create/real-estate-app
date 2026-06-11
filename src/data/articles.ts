@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "accommodation-tax-real-estate-trends",
     title: "宿泊税とは？不動産投資への影響と使途・今後の動向を税理士が解説",
     date: "2026-06-11",
+    image: "/images/articles/accommodation-tax-real-estate-trends.jpg",
     category: "税金・節税",
     keywords: ["宿泊税 不動産"],
     excerpt:
