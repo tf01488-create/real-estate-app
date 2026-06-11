@@ -28,7 +28,7 @@ export default function ArticlesPage() {
             href="/"
             className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
-            収支シミュレーター
+            投資シミュレーター
           </Link>
           <Link
             href="/income-simulator"

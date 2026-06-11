@@ -307,7 +307,7 @@ export default function IncomeSimulatorClient() {
             href="/"
             className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
-            投資シミュレーター →
+            投資シミュレーター
           </Link>
           <a
             href="https://lin.ee/QY17l0C"
