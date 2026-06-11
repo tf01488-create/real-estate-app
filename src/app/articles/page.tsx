@@ -7,6 +7,9 @@ import { ArticlesClient } from "./articles-client";
 export const metadata: Metadata = {
   title: "不動産投資コラム | 不動産投資　簡易シミュレーション",
   description: "不動産投資に役立つ記事を日々更新しています。",
+  alternates: {
+    canonical: "/articles",
+  },
 };
 
 export default function ArticlesPage() {

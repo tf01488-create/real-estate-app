@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "運営者情報 | 不動産投資　簡易シミュレーション",
   description: "不動産投資 簡易シミュレーションの運営者情報。川口哲也税理士事務所が運営する不動産投資支援ツールです。",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {
