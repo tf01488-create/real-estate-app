@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "お問い合わせ | 不動産投資　簡易シミュレーション",
   description: "不動産投資 簡易シミュレーションへのお問い合わせはこちら。川口哲也税理士事務所へのご相談・ご連絡をお受けしています。",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {
