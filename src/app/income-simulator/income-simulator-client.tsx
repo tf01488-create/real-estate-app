@@ -298,6 +298,12 @@ export default function IncomeSimulatorClient() {
             <p className="text-xs text-blue-100">経費・減価償却・損益通算の節税効果を試算</p>
           </div>
           <Link
+            href="/articles"
+            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+          >
+            コラム記事
+          </Link>
+          <Link
             href="/"
             className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
