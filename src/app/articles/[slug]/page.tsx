@@ -183,6 +183,21 @@ export default async function ArticlePage({ params }: Props) {
           </Link>
         </div>
 
+        {article.category === "税金・節税" && (
+          <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-gray-800 mb-1">不動産所得・税額も計算してみよう</p>
+              <p className="text-xs text-gray-500">家賃収入・経費・減価償却費を入力すると、不動産所得や所得税・住民税の概算額を自動計算できます。</p>
+            </div>
+            <Link
+              href="/income-simulator"
+              className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors"
+            >
+              所得シミュレーターを使う →
+            </Link>
+          </div>
+        )}
+
         {related.length > 0 && (
           <div className="mt-8">
             <h3 className="text-sm font-bold text-gray-700 mb-3">関連記事</h3>
