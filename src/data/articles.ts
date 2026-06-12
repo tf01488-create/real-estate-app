@@ -15,7 +15,7 @@ export const articles: Article[] = [
   {
     slug: "inheritance-real-estate-gift-vs-cash",
     title: "不動産の相続対策、生前贈与か現金化か？「持ち戻し7年」ルールの注意点を税理士が解説",
-    date: "2026-06-12",
+    date: "2026-06-13",
     category: "税金・節税",
     keywords: ["相続対策 不動産"],
     excerpt:
