@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-lease-consumption-tax",
     title: "不動産の貸付は消費税が課税される？非課税の境界線を駐車場・マンションの事例で税理士が解説",
     date: "2026-06-12",
+    image: "/images/articles/real-estate-lease-consumption-tax.jpg",
     category: "税金・節税",
     keywords: ["不動産貸付 消費税"],
     excerpt:
