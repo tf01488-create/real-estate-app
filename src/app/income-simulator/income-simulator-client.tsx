@@ -293,19 +293,19 @@ export default function IncomeSimulatorClient() {
           <Link href="/" className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
             <Building2 className="w-5 h-5 text-white" />
           </Link>
-          <div className="flex-1">
-            <h1 className="text-lg font-bold text-white">不動産所得　概算シミュレーション</h1>
-            <p className="text-xs text-blue-100">経費・減価償却・損益通算の節税効果を試算</p>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-bold text-white truncate">不動産所得　概算シミュレーション</h1>
+            <p className="text-xs text-blue-100 truncate">経費・減価償却・損益通算の節税効果を試算</p>
           </div>
           <Link
             href="/articles"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             コラム記事
           </Link>
           <Link
             href="/"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             投資シミュレーター
           </Link>

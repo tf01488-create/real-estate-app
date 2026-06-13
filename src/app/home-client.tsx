@@ -363,19 +363,19 @@ export default function HomeClient() {
           <div className="p-2 bg-white/20 rounded-lg">
             <Building2 className="w-5 h-5 text-white" />
           </div>
-          <div className="flex-1">
-            <h1 className="text-lg font-bold text-white">不動産投資　簡易シミュレーション</h1>
-            <p className="text-xs text-blue-100">35年間のキャッシュフローを分析</p>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-bold text-white truncate">不動産投資　簡易シミュレーション</h1>
+            <p className="text-xs text-blue-100 truncate">35年間のキャッシュフローを分析</p>
           </div>
           <Link
             href="/articles"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             コラム記事
           </Link>
           <Link
             href="/income-simulator"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             所得シミュレーター
           </Link>
