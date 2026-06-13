@@ -77,18 +77,18 @@ export default async function ArticlePage({ params }: Props) {
           <Link href="/" className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors">
             <Building2 className="w-5 h-5 text-white" />
           </Link>
-          <div className="flex-1">
-            <h1 className="text-lg font-bold text-white">不動産投資コラム</h1>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-bold text-white truncate">不動産投資コラム</h1>
           </div>
           <Link
             href="/"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             投資シミュレーター
           </Link>
           <Link
             href="/income-simulator"
-            className="text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            className="hidden sm:inline-block text-xs text-blue-100 hover:text-white border border-blue-400 hover:border-white px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
           >
             所得シミュレーター
           </Link>
