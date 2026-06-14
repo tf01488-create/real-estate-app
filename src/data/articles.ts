@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "dementia-real-estate-sale-inheritance",
     title: "認知症で不動産が売れない？相続対策に与える影響を税理士が解説",
     date: "2026-06-14",
+    image: "/images/articles/dementia-real-estate-sale-inheritance.jpg",
     category: "税金・節税",
     keywords: ["認知症 不動産 売却"],
     excerpt:
