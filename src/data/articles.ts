@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "dementia-real-estate-sale-inheritance",
-    title: "認知症になったら不動産は売れない？相続対策への影響と「家族信託」を税理士が解説",
+    title: "認知症で不動産が売れない？相続対策に与える影響を税理士が解説",
     date: "2026-06-14",
     category: "税金・節税",
     keywords: ["認知症 不動産 売却"],
