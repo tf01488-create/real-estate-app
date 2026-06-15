@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-rental-business-inheritance-planning",
     title: "不動産賃貸業オーナーの相続対策｜小規模宅地・法人化・最高裁判決を税理士が解説",
     date: "2026-06-15",
+    image: "/images/articles/real-estate-rental-business-inheritance-planning.jpg",
     category: "税金・節税",
     keywords: ["不動産賃貸業 相続対策"],
     excerpt:
