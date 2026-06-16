@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "low-utilization-land-transfer-special-deduction",
     title: "低未利用土地の譲渡100万円控除とは？空き家・空き地売却の要件を税理士が解説",
     date: "2026-06-16",
+    image: "/images/articles/low-utilization-land-transfer-special-deduction.jpg",
     category: "売却・出口戦略",
     keywords: ["低未利用土地 100万円控除"],
     excerpt:
