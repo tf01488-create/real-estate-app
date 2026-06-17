@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-transfer-income-short-long-term-calculation",
     title: "不動産の譲渡所得とは？短期・長期の違いと計算方法を税理士が解説",
     date: "2026-06-17",
+    image: "/images/articles/real-estate-transfer-income-short-long-term-calculation.jpg",
     category: "売却・出口戦略",
     keywords: ["譲渡所得 不動産 短期 長期"],
     excerpt:
