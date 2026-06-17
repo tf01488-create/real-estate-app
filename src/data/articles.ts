@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "myhome-tax-cost-purchase-sale-inheritance",
     title: "マイホームの税金・諸費用｜購入・売却・相続の注意点を税理士が解説",
     date: "2026-06-18",
+    image: "/images/articles/myhome-tax-cost-purchase-sale-inheritance.jpg",
     category: "税金・節税",
     keywords: ["マイホーム 税金 売却 相続 注意点"],
     excerpt:
