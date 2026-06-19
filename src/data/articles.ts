@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "leasehold-right-inheritance-sale-tax-treatment",
     title: "借地権の相続・売却における税務上の取り扱いを税理士が解説",
     date: "2026-06-19",
+    image: "/images/articles/leasehold-right-inheritance-sale-tax-treatment.jpg",
     category: "税金・節税",
     keywords: ["借地権 相続 売却"],
     excerpt:
