@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "inherited-land-state-reversion-system",
     title: "相続土地国庫帰属制度とは？不要な土地を手放す方法と注意点を税理士が解説",
     date: "2026-06-20",
+    image: "/images/articles/inherited-land-state-reversion-system.jpg",
     category: "税金・節税",
     keywords: ["相続土地国庫帰属制度"],
     excerpt:
