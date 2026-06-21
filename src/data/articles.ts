@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-leaseback-tax-considerations",
     title: "不動産のリースバックとは？仕組みと税務上の注意点を税理士が解説",
     date: "2026-06-21",
+    image: "/images/articles/real-estate-leaseback-tax-considerations.jpg",
     category: "売却・出口戦略",
     keywords: ["リースバック 不動産"],
     excerpt:
