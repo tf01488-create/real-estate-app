@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "sublease-contract-trouble-tax-points",
     title: "サブリース契約のトラブルとは？家賃保証の注意点を税理士が解説",
     date: "2026-06-22",
+    image: "/images/articles/sublease-contract-trouble-tax-points.jpg",
     category: "運用・管理",
     keywords: ["サブリース契約 トラブル"],
     excerpt:
