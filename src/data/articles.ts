@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-in-kind-contribution-procedure-tax",
     title: "不動産の現物出資とは？手続きと税務上の注意点を税理士が解説",
     date: "2026-06-23",
+    image: "/images/articles/real-estate-in-kind-contribution-procedure-tax.jpg",
     category: "税金・節税",
     keywords: ["現物出資 不動産"],
     excerpt:
