@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "real-estate-fair-value-inheritance-sale-gift",
-    title: "不動産の「時価」とは？相続・売買・贈与で使われる考え方を税理士が解説",
+    title: "不動産の時価とは？親族間売買・相続・贈与で問題になる価格の考え方を税理士が解説",
     date: "2026-06-24",
     category: "税金・節税",
     keywords: ["不動産 時価"],
