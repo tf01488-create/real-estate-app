@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "real-estate-owner-loan-collateral-points",
-    title: "不動産オーナーの借入における注意点とポイントを税理士が解説｜担保・金利・損益通算",
+    title: "不動産投資ローンの注意点とは？担保・金利・損益通算を税理士が解説",
     date: "2026-06-25",
     category: "融資・ローン",
     keywords: ["不動産オーナー 借入 注意点"],
