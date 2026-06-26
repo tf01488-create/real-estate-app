@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-fractional-crowdfunding-reit-tax-comparison",
     title: "不動産小口化商品・クラウドファンディング・REITを比較｜税務上の違いと注意点を税理士が解説",
     date: "2026-06-26",
+    image: "/images/articles/real-estate-fractional-crowdfunding-reit-tax-comparison.jpg",
     category: "運用・管理",
     keywords: ["不動産小口化商品 不動産クラウドファンディング REIT 違い 注意点"],
     excerpt:
