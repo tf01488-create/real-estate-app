@@ -174,6 +174,41 @@ export default async function ArticlePage({ params }: Props) {
                     ...(body ? [renderBold(body, `${i}-p`)] : []),
                   ];
                 }
+                if (paragraph.trim().startsWith("|")) {
+                  const rows = paragraph
+                    .trim()
+                    .split("\n")
+                    .map((r) => r.trim())
+                    .filter((r) => r.length > 0 && !/^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?$/.test(r))
+                    .map((r) => r.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim()));
+                  const [headerRow, ...bodyRows] = rows;
+                  return [
+                    <div key={`${i}-table`} className="overflow-x-auto my-4">
+                      <table className="w-full text-xs sm:text-sm border-collapse">
+                        <thead>
+                          <tr>
+                            {headerRow.map((cell, ci) => (
+                              <th key={ci} className="border border-gray-200 bg-blue-50 text-blue-800 font-bold px-3 py-2 text-left whitespace-nowrap">
+                                {cell}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {bodyRows.map((row, ri) => (
+                            <tr key={ri}>
+                              {row.map((cell, ci) => (
+                                <td key={ci} className="border border-gray-200 text-gray-700 px-3 py-2 whitespace-nowrap">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>,
+                  ];
+                }
                 return [renderBold(paragraph, `${i}`)];
               })}
             </div>
