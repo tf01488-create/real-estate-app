@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "farmland-inheritance-utilization-tax-special-measures",
     title: "農地を相続したらどうする？売却・貸付け・活用方法と税務上の特例を税理士が解説",
     date: "2026-06-27",
+    image: "/images/articles/farmland-inheritance-utilization-tax-special-measures.jpg",
     category: "税金・節税",
     keywords: ["農地 相続 活用 特例"],
     excerpt:
