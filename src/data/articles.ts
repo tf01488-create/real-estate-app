@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "foreign-buyer-real-estate-acquisition-regulation-japan",
     title: "外国人は日本の不動産を購入できる？規制の現状と今後の動向を税理士が解説",
     date: "2026-06-28",
+    image: "/images/articles/foreign-buyer-real-estate-acquisition-regulation-japan.jpg",
     category: "物件評価・購入",
     keywords: ["外国人 不動産 取得規制 動向"],
     excerpt:
