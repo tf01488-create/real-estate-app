@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "fixed-asset-acquisition-cost-incidental-expenses-tax-treatment",
     title: "不動産購入時の仲介手数料・登記費用・不動産取得税は取得価額に含める？税理士が解説",
     date: "2026-06-29",
+    image: "/images/articles/fixed-asset-acquisition-cost-incidental-expenses-tax-treatment.jpg",
     category: "税金・節税",
     keywords: ["固定資産 取得 付随費用 取り扱い"],
     excerpt:
