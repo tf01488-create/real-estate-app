@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "property-tax-depreciable-asset-tax-taxable-nontaxable",
     title: "固定資産税と償却資産税の違いとは？課税対象・申告が必要な資産を税理士が解説",
     date: "2026-06-30",
+    image: "/images/articles/property-tax-depreciable-asset-tax-taxable-nontaxable.jpg",
     category: "税金・節税",
     keywords: ["固定資産税 償却資産税 課税 非課税"],
     excerpt:
