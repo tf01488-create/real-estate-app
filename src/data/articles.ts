@@ -15,7 +15,7 @@ export const articles: Article[] = [
   {
     slug: "small-value-depreciable-assets-10-20-30-tax-accountant",
     title: "少額減価償却資産とは？10万円・20万円・30万円の違いを税理士が解説",
-    date: "2026-07-01",
+    date: "2026-07-03",
     category: "税金・節税",
     keywords: ["少額減価償却資産 10万円 20万円 30万円 違い"],
     excerpt:
