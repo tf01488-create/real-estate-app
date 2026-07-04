@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "ordinary-vs-fixed-term-lease-real-estate-tax-points",
     title: "普通借家契約と定期借家契約の違いとは？契約の特徴・相続への影響を税理士が解説",
     date: "2026-07-04",
+    image: "/images/articles/ordinary-vs-fixed-term-lease-real-estate-tax-points.jpg",
     category: "運用・管理",
     keywords: ["普通借家 定期借家 違い 不動産投資"],
     excerpt:
