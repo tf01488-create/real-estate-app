@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-sale-special-deductions-overview",
     title: "不動産売却の特例一覧｜3,000万円控除・空き家特例など適用要件を税理士が解説",
     date: "2026-07-05",
+    image: "/images/articles/real-estate-sale-special-deductions-overview.jpg",
     category: "売却・出口戦略",
     keywords: ["不動産 売却 特例 3000万円控除 空き家"],
     excerpt:
