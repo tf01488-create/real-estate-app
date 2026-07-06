@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-tax-reform-2026-summary",
     title: "令和8年版｜不動産オーナーが知っておきたい税制改正・法改正まとめ",
     date: "2026-07-06",
+    image: "/images/articles/real-estate-tax-reform-2026-summary.jpg",
     category: "税金・節税",
     keywords: ["不動産 税制改正 令和8年 相続税 マンション評価"],
     excerpt:
