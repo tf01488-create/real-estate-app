@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-investment-model-case-comparison",
     title: "不動産投資のリアルなモデルケース2選｜新築ワンルームvs築古中古を税理士が比較解説",
     date: "2026-07-07",
+    image: "/images/articles/real-estate-investment-model-case-comparison.jpg",
     category: "物件評価・購入",
     keywords: ["不動産投資 モデルケース シミュレーション 新築 築古 比較"],
     excerpt:
