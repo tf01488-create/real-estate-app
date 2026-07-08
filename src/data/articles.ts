@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-gift-tax-pitfalls",
     title: "それって贈与になる？ならない？不動産でうっかり贈与税を払わないための注意点を税理士が解説",
     date: "2026-07-08",
+    image: "/images/articles/real-estate-gift-tax-pitfalls.jpg",
     category: "税金・節税",
     keywords: ["贈与 不動産 注意点 贈与税 みなし贈与 低廉譲渡 共有名義"],
     excerpt:
