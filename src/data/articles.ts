@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "inheritance-tax-filing-basics",
     title: "相続税の申告は必要？基本的な考え方・申告期限・注意点を税理士が解説",
     date: "2026-07-09",
+    image: "/images/articles/inheritance-tax-filing-basics.jpg",
     category: "税金・節税",
     keywords: ["相続税 申告 基礎控除 期限 手続き 注意点 必要書類 申告不要"],
     excerpt:
