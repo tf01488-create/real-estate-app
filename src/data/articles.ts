@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "inheritance-taxable-nontaxable-assets",
     title: "相続税がかかる財産・かからない財産とは？課税・非課税の一覧と注意点を税理士が解説",
     date: "2026-07-10",
+    image: "/images/articles/inheritance-taxable-nontaxable-assets.jpg",
     category: "税金・節税",
     keywords: ["相続税 課税財産 非課税財産 みなし相続財産 名義預金 遺族年金 死亡保険金"],
     excerpt:
