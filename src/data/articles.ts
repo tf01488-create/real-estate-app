@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "residential-property-3000-special-deduction",
     title: "マイホーム売却の3,000万円特別控除とは？適用要件と実務上の注意点を税理士が解説",
     date: "2026-07-11",
+    image: "/images/articles/residential-property-3000-special-deduction.jpg",
     category: "売却・出口戦略",
     keywords: ["居住用財産 3000万円控除 特例 譲渡所得 マイホーム売却 要件"],
     excerpt:
