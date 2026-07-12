@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "real-estate-investment-risks-and-return",
     title: "不動産投資のリスクを甘く見ていませんか？利回り・元本回収・失敗しないための考え方を税理士が解説",
     date: "2026-07-12",
+    image: "/images/articles/real-estate-investment-risks-and-return.jpg",
     category: "物件評価・購入",
     keywords: ["不動産投資 リスク 利回り 元本回収 空室 金利上昇 失敗"],
     excerpt:
