@@ -16,6 +16,7 @@ export const articles: Article[] = [
     slug: "land-price-rise-inheritance-gift-tax-points",
     title: "路線価の上昇傾向で相続・贈与はどう変わる？不動産オーナーが今すぐ確認すべきポイントを税理士が解説",
     date: "2026-07-16",
+    image: "/images/articles/land-price-rise-inheritance-gift-tax-points.jpg",
     category: "税金・節税",
     keywords: ["路線価 上昇 相続税 贈与税 不動産 評価額 小規模宅地 みなし贈与"],
     excerpt:
